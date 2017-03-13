@@ -15,4 +15,4 @@ Skeleton of participants module
 - Jose Emilio Labra Gayo (@labra)
 - Katia Fernández Fernánedz (@katiafF)
 - Christian Martínez Abad (@cmabad)
-- Andrei Manu (@uo240704)
+- Andrei Manu (@andreimanu)
