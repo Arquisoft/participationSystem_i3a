@@ -7,6 +7,7 @@ public class User {
 	private boolean gender;
 	
 	public User(String name, String email, boolean gender) {
+		//this.id=UserDAO.getNumberOfUsers()+1;
 		this.name = name;
 		this.email = email;
 		this.gender = gender;
@@ -25,8 +26,7 @@ public class User {
 	}
 
 	/**
-	 * true for men, false for women
-	 * @return
+	 * @return true for men, false for women
 	 */
 	public boolean isGender() {
 		return gender;
