@@ -13,6 +13,6 @@ Skeleton of participants module
 
 - Herminio García González (@herminiogg)
 - Jose Emilio Labra Gayo (@labra)
-- Katia Fernández Fernánedz (@katiafF)
+- Katia Fernández Fernández (@katiafF)
 - Christian Martínez Abad (@cmabad)
 - Andrei Manu (@andreimanu)
