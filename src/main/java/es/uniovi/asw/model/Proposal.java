@@ -32,7 +32,7 @@ public class Proposal implements Filtrable{
 	}
 	
 	public List<Filtrable> getComments(Filter filter){
-		return filter.filter(this.comments);
+		return filter == null ? getComments() : filter.filter(this.comments);
 	}
 	
 	/*
