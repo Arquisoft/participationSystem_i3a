@@ -1,6 +1,7 @@
 package es.uniovi.asw.model;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +25,8 @@ public class Comment implements Filtrable,Removable{
 		//this.id=ProposalDAO.getNumberOfProposal()+1; ??
 		this.minimal = minimalNumberVotes;
 		this.votes = new HashMap<String, List<String>>();
+		this.votes.put("Positive", new ArrayList<String>());
+		this.votes.put("Negative", new ArrayList<String>());
 		this.user = user;
 		this.proposal = proposal;
 		this.text = text;
@@ -54,6 +57,14 @@ public class Comment implements Filtrable,Removable{
 		return votes;
 	}
 
+	public List<String> getPositiveVotes() {
+		return votes.get("Positive");
+	}
+	
+	public List<String> getNegativeVotes() {
+		return votes.get("Negative");
+	}
+	
 	public User getUser() {
 		return user;
 	}
