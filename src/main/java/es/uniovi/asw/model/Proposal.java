@@ -10,7 +10,8 @@ import es.uniovi.asw.model.filtrable.Filtrable;
 
 public class Proposal implements Filtrable{
 
-	private int id,minimal;
+	private int id;
+	private int minimal;
 	// option 1
 	private Map<String, List<String>> votes;
 	// option 2

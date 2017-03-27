@@ -3,7 +3,8 @@ package es.uniovi.asw.model;
 public class User {
 
 	private int id;
-	private String name,email;
+	private String name;
+	private String email;
 	private boolean gender;
 	
 	public User(String name, String email, boolean gender) {

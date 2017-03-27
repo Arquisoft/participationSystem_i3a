@@ -11,7 +11,8 @@ import es.uniovi.asw.model.filtrable.Filtrable;
 
 public class Comment implements Filtrable,Removable{
 
-	private int id, minimal;
+	private int id;
+	private int minimal;
 	private String text;
 	// option 1
 	private Map<String, List<String>> votes;
