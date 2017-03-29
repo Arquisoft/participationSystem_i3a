@@ -2,6 +2,7 @@ package es.uniovi.asw.controller;
 
 import java.util.List;
 
+import es.uniovi.asw.model.Comment;
 import es.uniovi.asw.model.filtrable.Filtrable;
 
 public class Chronological implements Filter{
@@ -12,7 +13,7 @@ public class Chronological implements Filter{
 		
 		
 		List<Comment> lst = (List<Comment>) listOfFiltables.stream().filter(x -> x instanceof Comment);
-		List<Filtrable> ret = (List<Filtrable>) lst.stream().map( x -> x.getDate().orderBy(this.date));
+		List<Filtrable> ret = (List<Filtrable>) lst.stream().map( x -> x.getDate().orderBy(x.getDate()));
 		return ret;
 	}
 }
