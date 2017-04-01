@@ -13,15 +13,15 @@ public class Main {
 	private static User currentUser = null;
 
 	public static void main (String[] args){
-		logUser();
+		//logUser();
 		mainMenu();
 	}
 	
 	private static User logUser(){
 		try {
-			while (currentUser== UserDao.getUserByName(console.readLine())){
+			while (currentUser == null) {
 				System.out.println("Log with a valid user");
-				currentUser = logUser();
+				currentUser = UserDao.getUserByName(console.readLine());
 			}
 		} catch (IOException e) {
 			currentUser = null;
