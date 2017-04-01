@@ -1,15 +1,16 @@
-package es.uniovi.asw.controller;
+package es.uniovi.asw.filters;
 
 import java.util.List;
 
 import es.uniovi.asw.model.filtrable.Filtrable;
 
-public class None implements Filter{
-
-
+public class NAllowedWords implements Filter{
+	
+	
 	@Override
 	public List<Filtrable> filter(List<Filtrable> listOfFiltables) {
-		return listOfFiltables;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

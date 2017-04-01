@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import es.uniovi.asw.controller.Filter;
+import es.uniovi.asw.PropReader;
+import es.uniovi.asw.filters.Filter;
 import es.uniovi.asw.model.filtrable.Filtrable;
 
 public class Proposal implements Filtrable{
@@ -32,6 +33,15 @@ public class Proposal implements Filtrable{
 		this.user = user;
 	}
 	
+	public Proposal(User user, String title, Category category, String text) {
+		this.minimal = Integer.parseInt(PropReader.get("minimumVotesNumber"));
+		this.votes = new HashMap<String, List<String>>();
+		this.comments = new ArrayList<Filtrable>();
+		this.category = category;
+		this.text = text;
+		this.user = user;
+	}
+
 	/**
 	 * returns the list of comments of the proposal. It may be filtered by one of the predefined filters
 	 * @param filter null, Category, Chronological, NAllowedWords, Popularity, WordFinder
