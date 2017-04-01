@@ -32,6 +32,11 @@ public class Proposal implements Filtrable{
 		this.user = user;
 	}
 	
+	/**
+	 * returns the list of comments of the proposal. It may be filtered by one of the predefined filters
+	 * @param filter null, Category, Chronological, NAllowedWords, Popularity, WordFinder
+	 * @return
+	 */
 	public List<Filtrable> getComments(Filter filter){
 		return filter == null ? getComments() : filter.filter(this.comments);
 	}
