@@ -16,7 +16,7 @@ public class MainMenu extends AbstractMenu{
 	@Override
 	public Menu chooseOption(int option, User currentUser){
 		if (option == 1){
-			ProposalMenu.getInstance().addProposal();
+			ProposalMenu.getInstance().addProposal(currentUser);
 			return getInstance();
 		}
 		if (option == 2){

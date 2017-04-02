@@ -13,7 +13,7 @@ public class Main {
 	private static User currentUser = null;
 
 	public static void main (String[] args){
-		logUser();
+		//logUser();
 		mainMenu();
 	}
 	

@@ -2,6 +2,8 @@ package es.uniovi.asw.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import es.uniovi.asw.PropReader;
@@ -32,8 +34,18 @@ private static Connection conn;
 	}
 	
 	public static User getUserByName(String userName) {
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(PropReader.get(""));
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs.next()){
+				return new User(rs.getString("Fname"), rs.getInt("id"));
+			}
+		} catch (SQLException e) {
+			return null;
+		}
 		return null;
-		//TODO
 	}
 
 }

@@ -18,12 +18,12 @@ public class Proposal implements Filtrable{
 	// option 2
 	//private List<User> positiveVotes, negativeVotes;
 	private List<Filtrable> comments;
-	private Category category;
+	private String category;
 	private String text;
 	private User user;
 	
 
-	public Proposal(int minimalNumberVotes, User user, Category category, String text){
+	public Proposal(int minimalNumberVotes, User user, String category, String text){
 		//this.id=ProposalDAO.getNumberOfProposal()+1; ??
 		this.minimal = minimalNumberVotes;
 		this.votes = new HashMap<String, List<String>>();
@@ -33,7 +33,7 @@ public class Proposal implements Filtrable{
 		this.user = user;
 	}
 	
-	public Proposal(User user, String title, Category category, String text) {
+	public Proposal(User user, String title, String category, String text) {
 		this.minimal = Integer.parseInt(PropReader.get("minimumVotesNumber"));
 		this.votes = new HashMap<String, List<String>>();
 		this.comments = new ArrayList<Filtrable>();
@@ -79,11 +79,18 @@ public class Proposal implements Filtrable{
 		return comments;
 	}
 
-	public Category getCategory() {
+	public String getCategory() {
 		return category;
 	}
 	
 	public User getUser() {
 		return user;
 	}
+
+	@Override
+	public String toString() {
+		return "Proposal [id=" + id + ", minimal=" + minimal + ", votes=" + votes + ", comments=" + comments
+				+ ", category=" + category + ", text=" + text + ", user=" + user + "]";
+	}
+	
 }
