@@ -14,6 +14,11 @@ public class User {
 		this.gender = gender;
 	}
 
+	public User(String name, int id){
+		this.id = id;
+		this.name = name;
+	}
+	
 	public int getId() {
 		return id;
 	}
