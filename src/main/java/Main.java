@@ -14,6 +14,14 @@ public class Main {
 
 	public static void main (String[] args){
 		//logUser();
+		/* Users:
+		 * ID		NAME					EMAIL					  GENDER
+		 * 1		Jorge Tarari		jorge@example.cpm				1
+		 *1679344	Andrei Manu			uo240704@uniovi.es				1
+		 *9940449	Ana Torres Pardo	ana@example.com					0
+		 *19160962	Luis Lopez Fernando	luis@example.com				1
+		 *90500084	Juan Torres Pardo	juan@example.com				1
+		 */
 		currentUser = new User("Andrei", 696969);
 		mainMenu();  
 	}
