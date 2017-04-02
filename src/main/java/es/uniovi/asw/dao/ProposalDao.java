@@ -43,7 +43,7 @@ public class ProposalDao {
 			pstmt.setInt(1, min);
 			ResultSet rs = pstmt.executeQuery();
 
-			if (rs.next()) {
+			while (rs.next()) {
 				UserDao.getUserByName("");
 				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("USERID")), rs.getString("Title"),
 						rs.getString("Category"), rs.getString("Text"));
@@ -64,8 +64,7 @@ public class ProposalDao {
 			pstmt.setInt(1, UserID);
 			ResultSet rs = pstmt.executeQuery();
 
-			if (rs.next()) {
-				UserDao.getUserByName("");
+			while (rs.next()) {
 				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("USERID")), rs.getString("Title"),
 						rs.getString("Category"), rs.getString("Text"));
 				User res = new User(rs.getString("Name"), rs.getInt("ID"));
@@ -85,8 +84,7 @@ public class ProposalDao {
 			pstmt.setString(1, category);
 			ResultSet rs = pstmt.executeQuery();
 
-			if (rs.next()) {
-				UserDao.getUserByName("");
+			while (rs.next()) {
 				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("USERID")), rs.getString("Title"),
 						rs.getString("Category"), rs.getString("Text"));
 				User res = new User(rs.getString("Name"), rs.getInt("ID"));

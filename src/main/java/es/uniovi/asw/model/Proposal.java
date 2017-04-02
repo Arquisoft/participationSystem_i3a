@@ -14,7 +14,7 @@ public class Proposal implements Filtrable{
 	private int id;
 	private int minimal;
 	// option 1
-	private Map<String, List<String>> votes;
+	private Map<String, List<User>> votes;
 	// option 2
 	//private List<User> positiveVotes, negativeVotes;
 	private List<Filtrable> comments;
@@ -26,7 +26,9 @@ public class Proposal implements Filtrable{
 	public Proposal(int minimalNumberVotes, User user, String category, String text){
 		//this.id=ProposalDAO.getNumberOfProposal()+1; ??
 		this.minimal = minimalNumberVotes;
-		this.votes = new HashMap<String, List<String>>();
+		this.votes = new HashMap<String, List<User>>();
+		votes.put("Positive", new ArrayList<User>());
+		votes.put("Negative", new ArrayList<User>());
 		this.comments = new ArrayList<Filtrable>();
 		this.category = category;
 		this.text = text;
@@ -35,13 +37,22 @@ public class Proposal implements Filtrable{
 	
 	public Proposal(User user, String title, String category, String text) {
 		this.minimal = Integer.parseInt(PropReader.get("minimumVotesNumber"));
-		this.votes = new HashMap<String, List<String>>();
+		this.votes = new HashMap<String, List<User>>();
+		votes.put("Positive", new ArrayList<User>());
+		votes.put("Negative", new ArrayList<User>());
 		this.comments = new ArrayList<Filtrable>();
 		this.category = category;
 		this.text = text;
 		this.user = user;
 	}
+	
+	public void AddPositive(User user) {
+		votes.get("Positive").add(user);
+	}
 
+	public void AddNegative(User user) {
+		votes.get("Negative").add(user);
+	}
 	/**
 	 * returns the list of comments of the proposal. It may be filtered by one of the predefined filters
 	 * @param filter null, Category, Chronological, NAllowedWords, Popularity, WordFinder
@@ -71,7 +82,7 @@ public class Proposal implements Filtrable{
 		return text;
 	}
 	
-	public Map<String, List<String>> getVotes() {
+	public Map<String, List<User>> getVotes() {
 		return votes;
 	}
 
