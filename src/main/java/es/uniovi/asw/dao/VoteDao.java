@@ -110,7 +110,7 @@ public class VoteDao {
 				PreparedStatement stmt = conn.prepareStatement(PropReader.get("VOTE_UPDATE"));
 				stmt.setInt(1, Type);
 				stmt.setInt(2, PropID);
-				stmt.setInt(3, UserID);
+				stmt.setInt(3, UserID); 
 				return stmt.executeUpdate();
 			}
 			PreparedStatement stmt = conn.prepareStatement(PropReader.get("VOTE_INSERT"));
