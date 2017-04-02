@@ -39,12 +39,31 @@ public class UserDao {
 	
 	public static User getUserByName(String userName) {
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(PropReader.get(""));
-			
+			PreparedStatement pstmt = conn.prepareStatement(PropReader.get("USER_BY_NAME"));
+			pstmt.setString(1, userName);
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()){
-				return new User(rs.getString("Fname"), rs.getInt("id"));
+				User res = new User(rs.getString("Name"), rs.getInt("ID"));
+				res.setGender(rs.getInt("Gender") == 0 ? false :  true);
+				return res;
+			}
+		} catch (SQLException e) {
+			return null;
+		}
+		return null;
+	}
+	
+	public static User getUserByID(int ID) {
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(PropReader.get("USER_BY_ID"));
+			pstmt.setInt(1, ID);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs.next()){
+				User res = new User(rs.getString("Name"), rs.getInt("ID"));
+				res.setGender(rs.getInt("Gender") == 0 ? false :  true);
+				return res;
 			}
 		} catch (SQLException e) {
 			return null;
