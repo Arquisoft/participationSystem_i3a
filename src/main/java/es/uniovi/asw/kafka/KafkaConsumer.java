@@ -14,7 +14,7 @@ public class KafkaConsumer {
 		if (kfc == null) {
 			Properties prop = new Properties();
 			prop.put("bootstrap.servers", "localhost:9092");
-			prop.put("group.id", "test");
+			prop.put("group.id", "test"); 
 			prop.put("enable.auto.commit", "true");
 			prop.put("auto.commit.interval.ms", "1000");
 			prop.put("session.timeout.ms", "30000");

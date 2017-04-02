@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.uniovi.asw.PropReader;
-import es.uniovi.asw.kafka.KafkaProducer;
+import es.uniovi.asw.kafka.KafkaProducer; 
 import es.uniovi.asw.model.Comment;
 import es.uniovi.asw.model.Proposal;
 import es.uniovi.asw.model.filtrable.Filtrable;

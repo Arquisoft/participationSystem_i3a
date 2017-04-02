@@ -7,7 +7,7 @@ import org.apache.kafka.common.serialization.StringSerializer;
 
 public class KafkaProducer {
 	private static org.apache.kafka.clients.producer.KafkaProducer<String, String> kfp;
-
+ 
 	public KafkaProducer() {
 		if (kfp == null) {
 			Properties prop = new Properties();
