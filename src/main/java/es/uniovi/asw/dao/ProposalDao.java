@@ -92,7 +92,7 @@ public class ProposalDao {
 				prop.SetID(rs.getInt("ID"));
 				VoteDao.SetVotes(prop);
 				propos.add(prop);
-			}
+			} 
 			return propos;
 		} catch (SQLException e) {
 			return null;

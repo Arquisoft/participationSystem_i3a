@@ -19,7 +19,7 @@ public class MainMenu extends AbstractMenu{
 			return getInstance();
 		}
 		if (option == 2){
-			ProposalMenu.getInstance().listProposals();
+			ProposalMenu.getInstance().listProposals(); 
 			return getInstance();
 		}
 		if (option == 3){

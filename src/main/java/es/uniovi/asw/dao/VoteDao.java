@@ -93,7 +93,7 @@ public class VoteDao {
 		try {
 			PreparedStatement stmt = conn.prepareStatement(PropReader.get("VOTE_EXISTS"));
 			stmt.setInt(1, PropID);
-			stmt.setInt(2, UserID);
+			stmt.setInt(2, UserID); 
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next())
 				return true;

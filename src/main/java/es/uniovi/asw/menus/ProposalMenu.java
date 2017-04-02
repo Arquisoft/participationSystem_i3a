@@ -60,7 +60,7 @@ public class ProposalMenu extends AbstractMenu{
 		}
 	}
 	
-	public void listProposalTitles(){
+	public void listProposalTitles(){ 
 		int counter = 1;
 		for (Proposal prop : ProposalDao.getAllProposals()){
 			System.out.println(counter + "," + prop.getTitle());
