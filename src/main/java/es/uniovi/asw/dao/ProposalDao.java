@@ -106,7 +106,7 @@ public class ProposalDao {
 			stmt.setString(2, proposal.getCategory());
 			stmt.setString(3, proposal.getTitle());
 			stmt.setString(4, proposal.getText());
-			
+			VoteDao.SaveVotes(proposal);
 			return stmt.executeUpdate();		
 
 		} catch (SQLException e) {

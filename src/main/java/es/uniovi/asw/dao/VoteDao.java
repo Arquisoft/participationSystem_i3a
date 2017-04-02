@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import es.uniovi.asw.PropReader;
 import es.uniovi.asw.model.Proposal;
@@ -50,6 +51,30 @@ public class VoteDao {
 			}
 		} catch (SQLException e) {
 			return;
+		}
+	}
+	
+	public static void SaveVotes(Proposal prop) {
+		List<User> pos = prop.getPositiveVotes();
+		List<User> neg = prop.getNegativeVotes();
+		for(User us : pos) {
+			InsertVotes(prop.getId(), us.getId(), 1);
+		}
+		for(User us : neg) {
+			InsertVotes(prop.getId(), us.getId(), 0);
+		}
+	}
+	
+	private static int InsertVotes(int PropID, int UserID, int Type) {
+		try {
+			PreparedStatement stmt = conn.prepareStatement(PropReader.get("VOTE_INSERT"));
+			stmt.setInt(1, PropID);
+			stmt.setInt(2, UserID);
+			stmt.setInt(3, Type);
+			return stmt.executeUpdate();		
+
+		} catch (SQLException e) {
+			return 0;		
 		}
 	}
 }
