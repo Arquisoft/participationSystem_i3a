@@ -5,13 +5,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import es.uniovi.asw.PropReader;
-import es.uniovi.asw.model.User;
 
-public class UserDao {
+public class CategoryDao {
 
 private static Connection conn;
 	
-	public UserDao() {
+	public CategoryDao() {
 		try {
 			openConn();
 		} catch (SQLException e) {
@@ -31,9 +30,7 @@ private static Connection conn;
 		
 	}
 	
-	public static User getUserByName(String userName) {
-		return null;
-		//TODO
+	public static String[] listCategories() {
+		return PropReader.get("categories").split(",");
 	}
-
 }

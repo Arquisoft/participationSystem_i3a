@@ -1,6 +1,7 @@
 package es.uniovi.asw.menus;
 
 import es.uniovi.asw.PropReader;
+import es.uniovi.asw.model.User;
 
 public class MainMenu extends AbstractMenu{
 
@@ -13,9 +14,8 @@ public class MainMenu extends AbstractMenu{
 	}
 	
 	@Override
-	public Menu chooseOption(int option){
+	public Menu chooseOption(int option, User currentUser){
 		if (option == 1){
-			ProposalMenu.getInstance().listProposals();
 			ProposalMenu.getInstance().addProposal();
 			return getInstance();
 		}
@@ -44,6 +44,5 @@ public class MainMenu extends AbstractMenu{
 		this.menuOptions.add(PropReader.get("mainMenuOption3"));
 		this.menuOptions.add(PropReader.get("mainMenuOption4"));
 		this.menuOptions.add(PropReader.get("mainMenuOption5"));
-
 	}
 }

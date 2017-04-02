@@ -11,7 +11,7 @@ public class ProposalMenu extends AbstractMenu{
 	}
 
 	public void addProposal(){
-		System.out.println("TODO: pedir datos al usuario (categoría, título y texto)  y añadir nueva propuesta");
+		System.out.println("TODO: pedir datos al usuario (categoría, título y texto) y añadir nueva propuesta");
 	}
 	
 	public void listProposals(){
@@ -20,5 +20,9 @@ public class ProposalMenu extends AbstractMenu{
 	
 	public void voteProposal(){
 		System.out.println("TODO: votar una propuesta positivo o negativo");
+	}
+	
+	private ProposalMenu(){		
+		this.menuOptions.add("TODO");
 	}
 }

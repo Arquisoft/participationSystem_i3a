@@ -13,14 +13,14 @@ public class Main {
 	private static User currentUser = null;
 
 	public static void main (String[] args){
-		//logUser();
+		logUser();
 		mainMenu();
 	}
 	
 	private static User logUser(){
 		try {
 			while (currentUser == null) {
-				System.out.println("Log with a valid user");
+				System.out.println("Log with a valid user (National ID)");
 				currentUser = UserDao.getUserByName(console.readLine());
 			}
 		} catch (IOException e) {
@@ -39,7 +39,7 @@ public class Main {
 			currentMenu.showOptions();
 			try{
 				option = console.readLine();
-				Menu newMenu = currentMenu.chooseOption(Integer.parseInt(option));
+				Menu newMenu = currentMenu.chooseOption(Integer.parseInt(option), currentUser);
 				currentMenu = (newMenu == null) ? currentMenu:newMenu;
 			} catch (IllegalArgumentException e){
 				if (!"exit".equals(option))

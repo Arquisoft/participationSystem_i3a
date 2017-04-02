@@ -5,6 +5,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.uniovi.asw.model.User;
+
 public class AbstractMenu implements Menu{
 
 	protected List<String> menuOptions = new ArrayList<String>();
@@ -18,7 +20,7 @@ public class AbstractMenu implements Menu{
 	}
 
 	@Override
-	public Menu chooseOption(int option) {
+	public Menu chooseOption(int option, User currentUser) {
 		return null;
 	}
 }
