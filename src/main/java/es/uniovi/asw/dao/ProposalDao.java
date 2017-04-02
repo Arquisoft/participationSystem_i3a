@@ -63,7 +63,6 @@ public class ProposalDao {
 			PreparedStatement pstmt = conn.prepareStatement(PropReader.get("PROPOSAL_BY_USER_ID"));
 			pstmt.setInt(1, UserID);
 			ResultSet rs = pstmt.executeQuery();
-
 			while (rs.next()) {
 				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("USERID")), rs.getString("Title"),
 						rs.getString("Category"), rs.getString("Text"));
@@ -77,7 +76,41 @@ public class ProposalDao {
 		return ret;
 	}
 	
-	public List<Proposal> GetProposalByCategory(String category) {
+	public static List<Proposal> getAllProposals() {
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(PropReader.get("PROPOSAL_ALL"));
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			List<Proposal> propos = new ArrayList<Proposal>();
+			
+			while (rs.next()){
+				propos.add(new Proposal(UserDao.getUserById(rs.getInt("USERID")),
+										rs.getString("Title"),rs.getString("Category"),rs.getString("text")));
+			}
+			return propos;
+		} catch (SQLException e) {
+			return null;
+		}
+	}
+	
+	public static int save(Proposal proposal) {
+		try {
+			PreparedStatement stmt = conn.prepareStatement(PropReader.get("PROPOSAL_INSERT"));
+
+			stmt.setInt(1, proposal.getUser().getId());
+			stmt.setString(2, proposal.getCategory());
+			stmt.setString(3, proposal.getTitle());
+			stmt.setString(4, proposal.getText());
+			
+			return stmt.executeUpdate();		
+
+		} catch (SQLException e) {
+			return 0;		
+		}
+	}
+	
+		public List<Proposal> GetProposalByCategory(String category) {
 		ArrayList<Proposal> ret = new ArrayList<Proposal>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(PropReader.get("PROPOSAL_BY_CATEGORY"));

@@ -3,6 +3,7 @@ package es.uniovi.asw.menus;
 import java.io.IOException;
 
 import es.uniovi.asw.dao.CategoryDao;
+import es.uniovi.asw.dao.ProposalDao;
 import es.uniovi.asw.model.Proposal;
 import es.uniovi.asw.model.User;
 
@@ -34,17 +35,20 @@ public class ProposalMenu extends AbstractMenu{
 			System.out.println(proposal.toString());
 			
 			// Meter en base de datos
-			// user tiene sólo id y name
+			int result = ProposalDao.save(proposal);
+			
+			if (result == 0)
+				System.out.println("There was an error in the proposal creation.");
 			
 		} catch (Exception e){
 			System.out.println("The proposal cretion was not completed. Try again.");
 			return;
 		}
-
 	}
 	
 	public void listProposals(){
-		System.out.println("TODO: mostrar todas las propuestas guardadas en la base de datos");
+		for (Proposal prop : ProposalDao.getAllProposals())
+			System.out.println(prop.toString());
 	}
 	
 	public void voteProposal(){
