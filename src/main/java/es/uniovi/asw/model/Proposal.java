@@ -88,7 +88,9 @@ public class Proposal implements Filtrable{
 	public User getUser() {
 		return user;
 	}
-
+	public void SetUser(User user) {
+		this.user = user;
+	}
 	@Override
 	public String toString() {
 		return "Proposal [id=" + id + ", minimal=" + minimal + ", votes=" + votes + ", comments=" + comments
