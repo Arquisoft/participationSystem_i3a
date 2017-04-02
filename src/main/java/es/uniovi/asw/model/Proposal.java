@@ -34,16 +34,7 @@ public class Proposal implements Filtrable {
 		this.text = text;
 		this.user = user;
 	}
-	// public Proposal(int minimalNumberVotes, User user, String category,
-	// String text){
-	// //this.id=ProposalDAO.getNumberOfProposal()+1; ??
-	// this.minimal = minimalNumberVotes;
-	// this.votes = new HashMap<String, List<String>>();
-	// this.comments = new ArrayList<Filtrable>();
-	// this.category = category;
-	// this.text = text;
-	// this.user = user;
-	// }
+
 
 	public Proposal(User user, String title, String category, String text) {
 		this.minimal = Integer.parseInt(PropReader.get("minimumVotesNumber"));
@@ -128,6 +119,11 @@ public class Proposal implements Filtrable {
 		return this.title;
 	}
 
+
+	public void addComment(Comment comment) {
+		this.comments.add(comment);
+	}
+	
 	public List<User> getPositiveVotes() {
 		return votes.get("Positive");
 	}

@@ -12,7 +12,6 @@ import es.uniovi.asw.model.filtrable.Filtrable;
 public class Comment implements Filtrable,Removable{
 
 	private int id;
-	private int minimal;
 	private String text;
 	// option 1
 	private Map<String, List<String>> votes;
@@ -22,9 +21,8 @@ public class Comment implements Filtrable,Removable{
 	private String date;
 	private Proposal proposal;
 	
-	public Comment(int minimalNumberVotes, User user, Proposal proposal, String text){
+	public Comment(User user, Proposal proposal, String text){
 		//this.id=ProposalDAO.getNumberOfProposal()+1; ??
-		this.minimal = minimalNumberVotes;
 		this.votes = new HashMap<String, List<String>>();
 		this.votes.put("Positive", new ArrayList<String>());
 		this.votes.put("Negative", new ArrayList<String>());
@@ -44,10 +42,6 @@ public class Comment implements Filtrable,Removable{
 
 	public int getId() {
 		return id;
-	}
-
-	public int getMinimal() {
-		return minimal;
 	}
 
 	public String getText() {

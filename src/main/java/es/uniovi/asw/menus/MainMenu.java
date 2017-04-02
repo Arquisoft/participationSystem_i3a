@@ -24,8 +24,8 @@ public class MainMenu extends AbstractMenu{
 			return getInstance();
 		}
 		if (option == 3){
-			ProposalMenu.getInstance().listProposals();
-			return CommentMenu.getInstance();
+			ProposalMenu.getInstance().listProposalTitles();
+			CommentMenu.getInstance().commentProposal(currentUser);
 		}
 		if (option == 4){
 			ProposalMenu.getInstance().voteProposal();
