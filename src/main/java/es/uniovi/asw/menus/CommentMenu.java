@@ -1,6 +1,6 @@
 package es.uniovi.asw.menus;
 
-import java.io.IOException;
+import java.util.List;
 
 import es.uniovi.asw.dao.CommentDao;
 import es.uniovi.asw.dao.ProposalDao;
@@ -28,15 +28,26 @@ public class CommentMenu extends AbstractMenu{
 			
 			System.out.println("Choose the comment you want to vote");
 			Proposal propos = ProposalDao.getAllProposals().get(proposal-1);
+			
+			propos.setComments(new CommentDao().getCommentsOf(propos));
+			
 			showCommentsOf(propos);
 			
 			int comment = Integer.parseInt(console.readLine());
 			
-			VoteDao.SaveVotes(propos.getComments().get(comment));
+			Comment comm = (Comment) propos.getComments().get(comment);
+			
+			System.out.println("Press 1 to vote positive and 2 to vote negative");
+			String choice = console.readLine();
+			if("1".equals(choice))
+				comm.AddPositive(currentUser);
+			else if(("2").equals(choice))
+				comm.AddNegative(currentUser);
+			
+			VoteDao.SaveVotes(comm);
 			
 		} catch (Exception e) {
-			System.out.println("That's not valid");
-		}
+e.printStackTrace();		}
 		
 		System.out.println("TODO: votar un comentario positivo o negativo");
 	}

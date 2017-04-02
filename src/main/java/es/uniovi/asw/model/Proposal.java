@@ -136,6 +136,11 @@ public class Proposal implements Filtrable {
 
 	public void SetID(int int1) {
 		this.id = int1;
+	}
+
+
+	public void setComments(List<Filtrable> list) {
+		this.comments = list;
 	} 
  
 }

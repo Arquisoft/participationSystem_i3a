@@ -32,6 +32,14 @@ public class Comment implements Filtrable,Removable{
 		this.date = new java.sql.Date(dt.getDay(), dt.getMonth(), dt.getYear());
 	}
 	
+	public void AddPositive(User user) {
+		votes.get("Positive").add(user);
+	}
+
+	public void AddNegative(User user) {
+		votes.get("Negative").add(user);
+	}
+	
 	/*
 	 * Public ?
 	 */

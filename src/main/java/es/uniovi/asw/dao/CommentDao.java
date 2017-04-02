@@ -3,10 +3,15 @@ package es.uniovi.asw.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import es.uniovi.asw.PropReader;
 import es.uniovi.asw.model.Comment;
+import es.uniovi.asw.model.Proposal;
+import es.uniovi.asw.model.filtrable.Filtrable;
 
 public class CommentDao {
 
@@ -44,6 +49,25 @@ public class CommentDao {
 
 		} catch (SQLException e) {
 			return 0;		
+		}
+	}
+	
+	public List<Filtrable> getCommentsOf(Proposal proposal){
+		try {
+			PreparedStatement stmt = conn.prepareStatement(PropReader.get("COMMENT_BY_PROPOSAL"));
+			stmt.setInt(1, proposal.getId());
+			
+			ResultSet rs = stmt.executeQuery();		
+			
+			List<Filtrable> comments = new ArrayList<Filtrable>();
+			while(rs.next()){
+				comments.add(new Comment(null, proposal, rs.getString("Text")));
+			}
+			
+			return comments;
+			
+		} catch (SQLException e) {
+			return null;		
 		}
 	}
 }
