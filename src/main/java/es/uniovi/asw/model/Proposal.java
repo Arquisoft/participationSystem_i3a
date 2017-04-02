@@ -101,5 +101,10 @@ public class Proposal implements Filtrable{
 	public String getTitle() {
 		return this.title;
 	}
+
+
+	public void addComment(Comment comment) {
+		this.comments.add(comment);
+	}
 	
 }
