@@ -39,9 +39,9 @@ public class CommentDao {
 			PreparedStatement stmt = conn.prepareStatement(PropReader.get("COMMENT_INSERT"));
 
 			stmt.setInt(1, comment.getUser().getId());
+			stmt.setDate(3, comment.getDate());
 			stmt.setString(2, comment.getText());
-			stmt.setString(3, ¡¡fecha!!);
-			stmt.setString(4, proposal.getText());
+			stmt.setString(4, comment.getText());
 			
 			return stmt.executeUpdate();		
 

@@ -55,7 +55,7 @@ public class VoteDao {
 		}
 	}
 
-	public static int SaveVotes(Comment com) {
+	public static void SaveVotes(Comment com) {
 		List<User> pos = com.getPositiveVotes();
 		List<User> neg = com.getNegativeVotes();
 		for (User us : pos) {
@@ -77,7 +77,7 @@ public class VoteDao {
 			return 0;
 		}
 	}
-	
+	 
 	public static void SaveVotes(Proposal prop) {
 		List<User> pos = prop.getPositiveVotes();
 		List<User> neg = prop.getNegativeVotes();
