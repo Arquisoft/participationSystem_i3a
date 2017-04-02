@@ -36,7 +36,7 @@ public class VoteDao {
 		}
 
 	}
-
+	
 	public static void SetVotes(Proposal prop) {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(PropReader.get("VOTE_PROP"));
@@ -44,11 +44,11 @@ public class VoteDao {
 			ResultSet rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				if (rs.getInt("Type") == 1)
+				if(rs.getInt("Type") == 1) 
 					prop.AddPositive(UserDao.getUserByID(rs.getInt("VotUserID")));
 				else
 					prop.AddNegative(UserDao.getUserByID(rs.getInt("VotUserID")));
-
+					
 			}
 		} catch (SQLException e) {
 			return;
