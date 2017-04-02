@@ -103,9 +103,11 @@ public class ProposalDao {
 			PreparedStatement stmt = conn.prepareStatement(PropReader.get("PROPOSAL_INSERT"));
 
 			stmt.setInt(1, proposal.getUser().getId());
-			stmt.setString(2, proposal.getCategory());
-			stmt.setString(3, proposal.getTitle());
-			stmt.setString(4, proposal.getText());
+			stmt.setInt(2, proposal.getMinimal());
+			stmt.setString(3, proposal.getText());
+			stmt.setInt(4, proposal.getUser().getId());
+			stmt.setString(5, proposal.getTitle());
+			stmt.setString(6, proposal.getCategory());
 			VoteDao.SaveVotes(proposal);
 			return stmt.executeUpdate();		
 
