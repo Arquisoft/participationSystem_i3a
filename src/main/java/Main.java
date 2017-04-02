@@ -22,7 +22,7 @@ public class Main {
 		 *19160962	Luis Lopez Fernando	luis@example.com				1
 		 *90500084	Juan Torres Pardo	juan@example.com				1
 		 */
-		currentUser = new User("Andrei", 696969);
+		currentUser = new User("Andrei Manu", 1679344);
 		mainMenu();  
 	}
 	
