@@ -133,4 +133,9 @@ public class Proposal implements Filtrable {
 		return votes.get("Negative");
 	}
 
+
+	public void SetID(int int1) {
+		this.id = int1;
+	}
+
 }

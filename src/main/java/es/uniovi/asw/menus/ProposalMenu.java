@@ -68,8 +68,27 @@ public class ProposalMenu extends AbstractMenu{
 		}
 	}
 	
-	public void voteProposal(){
-		System.out.println("TODO: votar una propuesta positivo o negativo");
+	public void voteProposal(User currentUser){
+		listProposalTitles();
+		System.out.println("Please choose the proposal you would like to vote on");
+		try {
+			Proposal prop = ProposalDao.getAllProposals().get(Integer.parseInt(console.readLine())-1);
+			System.out.println("Press 1 to vote positive and 2 to vote negative");
+			String choice = console.readLine();
+			if(choice.equals("1"))
+				prop.AddPositive(currentUser);
+			else if(choice.equals("2"))
+				prop.AddNegative(currentUser);
+			else
+				System.out.println("Invalid choice");
+			ProposalDao.save(prop);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private ProposalMenu(){		

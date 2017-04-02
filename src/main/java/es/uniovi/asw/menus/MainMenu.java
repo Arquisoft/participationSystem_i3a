@@ -6,7 +6,6 @@ import es.uniovi.asw.model.User;
 public class MainMenu extends AbstractMenu{
 
 	private static MainMenu menu = null;
-	
 	public static MainMenu getInstance(){
 		if (null == menu)
 			menu = new MainMenu();
@@ -26,9 +25,10 @@ public class MainMenu extends AbstractMenu{
 		if (option == 3){
 			ProposalMenu.getInstance().listProposalTitles();
 			CommentMenu.getInstance().commentProposal(currentUser);
+			return getInstance();
 		}
 		if (option == 4){
-			ProposalMenu.getInstance().voteProposal();
+			ProposalMenu.getInstance().voteProposal(currentUser);
 			return getInstance();
 		}
 		if (option == 5){

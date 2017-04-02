@@ -89,6 +89,7 @@ public class ProposalDao {
 			while (rs.next()){
 				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("USERID")),
 										rs.getString("Title"),rs.getString("Category"),rs.getString("text"));
+				prop.SetID(rs.getInt("ID"));
 				VoteDao.SetVotes(prop);
 				propos.add(prop);
 			}
@@ -98,16 +99,35 @@ public class ProposalDao {
 		}
 	}
 	
-	public int save(Proposal proposal) {
+	private static boolean exists(Proposal proposal) {
 		try {
+			PreparedStatement stmt = conn.prepareStatement(PropReader.get("PROPOSAL_EXISTS"));
+			stmt.setInt(1, proposal.getId());
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next())
+				return true;
+			return false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+	public static int save(Proposal proposal) {
+		
+		try {
+			if(exists(proposal)) {
+				VoteDao.SaveVotes(proposal);
+				return 1;
+			}
+			
 			PreparedStatement stmt = conn.prepareStatement(PropReader.get("PROPOSAL_INSERT"));
 
-			stmt.setInt(1, proposal.getId());
-			stmt.setInt(2, proposal.getMinimal());
-			stmt.setString(3, proposal.getText());
-			stmt.setInt(4, proposal.getUser().getId());
-			stmt.setString(5, proposal.getTitle());
-			stmt.setString(6, proposal.getCategory());
+			stmt.setInt(1, proposal.getMinimal());
+			stmt.setString(2, proposal.getText());
+			stmt.setInt(3, proposal.getUser().getId());
+			stmt.setString(4, proposal.getTitle());
+			stmt.setString(5, proposal.getCategory());
 			VoteDao.SaveVotes(proposal);
 			return stmt.executeUpdate();		
 

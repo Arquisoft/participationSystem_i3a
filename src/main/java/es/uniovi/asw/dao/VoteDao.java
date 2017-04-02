@@ -89,8 +89,30 @@ public class VoteDao {
 		}
 	}
 
+	private static boolean Exists(int PropID, int UserID) {
+		try {
+			PreparedStatement stmt = conn.prepareStatement(PropReader.get("VOTE_EXISTS"));
+			stmt.setInt(1, PropID);
+			stmt.setInt(2, UserID);
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next())
+				return true;
+			return false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
 	private static int InsertVotesProp(int PropID, int UserID, int Type) {
 		try {
+			if(Exists(PropID, UserID)) {
+				PreparedStatement stmt = conn.prepareStatement(PropReader.get("VOTE_UPDATE"));
+				stmt.setInt(1, Type);
+				stmt.setInt(2, PropID);
+				stmt.setInt(3, UserID);
+				return stmt.executeUpdate();
+			}
 			PreparedStatement stmt = conn.prepareStatement(PropReader.get("VOTE_INSERT"));
 			stmt.setInt(1, PropID);
 			stmt.setInt(2, UserID);
