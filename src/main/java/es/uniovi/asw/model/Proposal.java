@@ -21,17 +21,17 @@ public class Proposal implements Filtrable{
 	private String category;
 	private String text;
 	private User user;
-	
+	private String title;
 
-	public Proposal(int minimalNumberVotes, User user, String category, String text){
-		//this.id=ProposalDAO.getNumberOfProposal()+1; ??
-		this.minimal = minimalNumberVotes;
-		this.votes = new HashMap<String, List<String>>();
-		this.comments = new ArrayList<Filtrable>();
-		this.category = category;
-		this.text = text;
-		this.user = user;
-	}
+//	public Proposal(int minimalNumberVotes, User user, String category, String text){
+//		//this.id=ProposalDAO.getNumberOfProposal()+1; ??
+//		this.minimal = minimalNumberVotes;
+//		this.votes = new HashMap<String, List<String>>();
+//		this.comments = new ArrayList<Filtrable>();
+//		this.category = category;
+//		this.text = text;
+//		this.user = user;
+//	}
 	
 	public Proposal(User user, String title, String category, String text) {
 		this.minimal = Integer.parseInt(PropReader.get("minimumVotesNumber"));
@@ -40,7 +40,9 @@ public class Proposal implements Filtrable{
 		this.category = category;
 		this.text = text;
 		this.user = user;
+		this.title = title;
 	}
+
 
 	/**
 	 * returns the list of comments of the proposal. It may be filtered by one of the predefined filters
@@ -91,6 +93,11 @@ public class Proposal implements Filtrable{
 	public String toString() {
 		return "Proposal [id=" + id + ", minimal=" + minimal + ", votes=" + votes + ", comments=" + comments
 				+ ", category=" + category + ", text=" + text + ", user=" + user + "]";
+	}
+
+
+	public String getTitle() {
+		return this.title;
 	}
 	
 }

@@ -35,7 +35,22 @@ private static Connection conn;
 	
 	public static User getUserByName(String userName) {
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(PropReader.get(""));
+			PreparedStatement pstmt = conn.prepareStatement(PropReader.get("USER_BY_NAME"));
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs.next()){
+				return new User(rs.getString("Fname"), rs.getInt("id"));
+			}
+		} catch (SQLException e) {
+			return null;
+		}
+		return null;
+	}
+	
+	public static User getUserById(int id) {
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(PropReader.get("USER_BY_ID"));
 			
 			ResultSet rs = pstmt.executeQuery();
 			
