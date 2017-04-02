@@ -35,7 +35,7 @@ public class VoteDao {
 
 	}
 	
-	public void SetVotes(Proposal prop) {
+	public static void SetVotes(Proposal prop) {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(PropReader.get("VOTE_PROP"));
 			pstmt.setInt(1, prop.getId());

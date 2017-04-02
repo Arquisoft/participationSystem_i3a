@@ -23,7 +23,6 @@ public class Proposal implements Filtrable{
 	private User user;
 	private String title;
 
-<<<<<<< HEAD
 	public Proposal(int minimalNumberVotes, User user, String category, String text){
 		//this.id=ProposalDAO.getNumberOfProposal()+1; ??
 		this.minimal = minimalNumberVotes;
@@ -35,7 +34,6 @@ public class Proposal implements Filtrable{
 		this.text = text;
 		this.user = user;
 	}
-=======
 //	public Proposal(int minimalNumberVotes, User user, String category, String text){
 //		//this.id=ProposalDAO.getNumberOfProposal()+1; ??
 //		this.minimal = minimalNumberVotes;
@@ -45,7 +43,6 @@ public class Proposal implements Filtrable{
 //		this.text = text;
 //		this.user = user;
 //	}
->>>>>>> refs/remotes/origin/master
 	
 	public Proposal(User user, String title, String category, String text) {
 		this.minimal = Integer.parseInt(PropReader.get("minimumVotesNumber"));
@@ -58,15 +55,9 @@ public class Proposal implements Filtrable{
 		this.user = user;
 		this.title = title;
 	}
-<<<<<<< HEAD
-	
 	public void AddPositive(User user) {
 		votes.get("Positive").add(user);
 	}
-=======
-
->>>>>>> refs/remotes/origin/master
-
 	public void AddNegative(User user) {
 		votes.get("Negative").add(user);
 	}

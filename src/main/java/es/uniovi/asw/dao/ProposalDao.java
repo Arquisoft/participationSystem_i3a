@@ -49,6 +49,7 @@ public class ProposalDao {
 						rs.getString("Category"), rs.getString("Text"));
 				User res = new User(rs.getString("Name"), rs.getInt("ID"));
 				res.setGender(rs.getInt("Gender") == 0 ? false : true);
+				VoteDao.SetVotes(prop);
 				ret.add(prop);
 			}
 		} catch (SQLException e) {
@@ -68,6 +69,7 @@ public class ProposalDao {
 						rs.getString("Category"), rs.getString("Text"));
 				User res = new User(rs.getString("Name"), rs.getInt("ID"));
 				res.setGender(rs.getInt("Gender") == 0 ? false : true);
+				VoteDao.SetVotes(prop);
 				ret.add(prop);
 			}
 		} catch (SQLException e) {
@@ -85,8 +87,10 @@ public class ProposalDao {
 			List<Proposal> propos = new ArrayList<Proposal>();
 			
 			while (rs.next()){
-				propos.add(new Proposal(UserDao.getUserById(rs.getInt("USERID")),
-										rs.getString("Title"),rs.getString("Category"),rs.getString("text")));
+				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("USERID")),
+										rs.getString("Title"),rs.getString("Category"),rs.getString("text"));
+				VoteDao.SetVotes(prop);
+				propos.add(prop);
 			}
 			return propos;
 		} catch (SQLException e) {
@@ -122,6 +126,7 @@ public class ProposalDao {
 						rs.getString("Category"), rs.getString("Text"));
 				User res = new User(rs.getString("Name"), rs.getInt("ID"));
 				res.setGender(rs.getInt("Gender") == 0 ? false : true);
+				VoteDao.SetVotes(prop);
 				ret.add(prop);
 			}
 		} catch (SQLException e) {
