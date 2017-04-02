@@ -110,4 +110,25 @@ public class ProposalDao {
 			return 0;		
 		}
 	}
+	
+		public List<Proposal> GetProposalByCategory(String category) {
+		ArrayList<Proposal> ret = new ArrayList<Proposal>();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(PropReader.get("PROPOSAL_BY_CATEGORY"));
+			pstmt.setString(1, category);
+			ResultSet rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				UserDao.getUserByName("");
+				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("USERID")), rs.getString("Title"),
+						rs.getString("Category"), rs.getString("Text"));
+				User res = new User(rs.getString("Name"), rs.getInt("ID"));
+				res.setGender(rs.getInt("Gender") == 0 ? false : true);
+				ret.add(prop);
+			}
+		} catch (SQLException e) {
+			return null;
+		}
+		return ret;
+	}
 }
