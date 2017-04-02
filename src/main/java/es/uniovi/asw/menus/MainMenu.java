@@ -33,7 +33,8 @@ public class MainMenu extends AbstractMenu{
 			return getInstance();
 		}
 		if (option == 5){
-			CommentMenu.getInstance().voteComment();
+			ProposalMenu.getInstance().listProposalTitles();
+			CommentMenu.getInstance().voteComment(currentUser);
 			return getInstance();
 		}
 		throw new IllegalArgumentException();

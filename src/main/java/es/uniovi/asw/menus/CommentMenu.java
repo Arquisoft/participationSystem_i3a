@@ -1,10 +1,14 @@
 package es.uniovi.asw.menus;
 
+import java.io.IOException;
+
 import es.uniovi.asw.dao.CommentDao;
 import es.uniovi.asw.dao.ProposalDao;
+import es.uniovi.asw.dao.VoteDao;
 import es.uniovi.asw.model.Comment;
 import es.uniovi.asw.model.Proposal;
 import es.uniovi.asw.model.User;
+import es.uniovi.asw.model.filtrable.Filtrable;
 
 public class CommentMenu extends AbstractMenu{
 
@@ -16,10 +20,35 @@ public class CommentMenu extends AbstractMenu{
 		return menu;
 	}
 	
-	public void voteComment(){
+	public void voteComment(User currentUser){
+		System.out.println("Please choose a proposal");
+		
+		try {
+			int proposal = Integer.parseInt(console.readLine());
+			
+			System.out.println("Choose the comment you want to vote");
+			Proposal propos = ProposalDao.getAllProposals().get(proposal-1);
+			showCommentsOf(propos);
+			
+			int comment = Integer.parseInt(console.readLine());
+			
+			VoteDao.SaveVotes(propos.getComments().get(comment));
+			
+		} catch (Exception e) {
+			System.out.println("That's not valid");
+		}
+		
 		System.out.println("TODO: votar un comentario positivo o negativo");
 	}
 	
+	private void showCommentsOf(Proposal proposal) {
+		int counter = 1;
+		for (Filtrable comment : proposal.getComments()){
+			System.out.println(counter + ". " +((Comment) comment).getText());
+			counter++;
+		}
+	}
+
 	private CommentMenu(){  
 		this.menuOptions.add("TODO");
 	}
