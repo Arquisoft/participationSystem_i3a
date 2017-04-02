@@ -14,7 +14,8 @@ public class Main {
 
 	public static void main (String[] args){
 		//logUser();
-		mainMenu();
+		currentUser = new User("Andrei", 696969);
+		mainMenu();  
 	}
 	
 	private static User logUser(){

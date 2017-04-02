@@ -11,7 +11,6 @@ public class ProposalMenu extends AbstractMenu{
 
 	private static ProposalMenu menu = null;
 	
-	
 	public static ProposalMenu getInstance() {
 		if (menu == null)
 			menu = new ProposalMenu();
@@ -35,14 +34,13 @@ public class ProposalMenu extends AbstractMenu{
 			System.out.println(proposal.toString());
 			new ProposalDao();
 			// Meter en base de datos
-			int result = ProposalDao.save(proposal);
+			int result = new ProposalDao().save(proposal);
 			
 			if (result == 0)
 				System.out.println("There was an error in the proposal creation.");
 			
 		} catch (Exception e){
-			System.out.println("The proposal cretion was not completed. Try again.");
-			return;
+			e.printStackTrace();
 		}
 	}
 	

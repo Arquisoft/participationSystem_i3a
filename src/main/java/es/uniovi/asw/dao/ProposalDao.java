@@ -98,7 +98,7 @@ public class ProposalDao {
 		}
 	}
 	
-	public static int save(Proposal proposal) {
+	public int save(Proposal proposal) {
 		try {
 			PreparedStatement stmt = conn.prepareStatement(PropReader.get("PROPOSAL_INSERT"));
 
