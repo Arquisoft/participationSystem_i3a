@@ -25,7 +25,7 @@ public class KafkaProducer {
 	}
 
 	public void SendMessage(String topic, String message) {
-		kfp.send(new ProducerRecord<String, String>(topic, message));
-		kfp.close();
+		//kfp.send(new ProducerRecord<String, String>(topic, message));
+		//kfp.close();
 	}
 }

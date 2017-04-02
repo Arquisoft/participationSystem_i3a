@@ -60,17 +60,15 @@ public class ProposalDao {
 		return ret;
 	}
 	
-	public List<Proposal> GetProposalByUser(int UserID) {
+	public static List<Proposal> GetProposalByUser(int UserID) {
 		ArrayList<Proposal> ret = new ArrayList<Proposal>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(PropReader.get("PROPOSAL_BY_USER_ID"));
 			pstmt.setInt(1, UserID);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("USERID")), rs.getString("Title"),
+				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("UserID")), rs.getString("Title"),
 						rs.getString("Category"), rs.getString("Text"));
-				User res = new User(rs.getString("Name"), rs.getInt("ID"));
-				res.setGender(rs.getInt("Gender") == 0 ? false : true);
 				VoteDao.SetVotes(prop);
 				ret.add(prop);
 			}
