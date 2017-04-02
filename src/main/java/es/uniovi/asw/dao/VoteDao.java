@@ -77,6 +77,7 @@ public class VoteDao {
 			return 0;
 		}
 	}
+	
 	public static void SaveVotes(Proposal prop) {
 		List<User> pos = prop.getPositiveVotes();
 		List<User> neg = prop.getNegativeVotes();
