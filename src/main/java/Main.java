@@ -46,7 +46,7 @@ public class Main {
 		while (!"exit".equals(option)){
 			System.out.println("");
 			currentMenu.showOptions();
-			try{
+			try{  
 				option = console.readLine();
 				Menu newMenu = currentMenu.chooseOption(Integer.parseInt(option), currentUser);
 				currentMenu = (newMenu == null) ? currentMenu:newMenu;

@@ -31,7 +31,7 @@ public class CommentDao {
 			e.printStackTrace();
 		}
 	}
-	
+	  
 	public static int save(Comment comment) {
 		try {
 			PreparedStatement stmt = conn.prepareStatement(PropReader.get("COMM_INSERT"));

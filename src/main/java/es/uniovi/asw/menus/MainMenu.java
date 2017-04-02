@@ -11,7 +11,7 @@ public class MainMenu extends AbstractMenu{
 		if (null == menu)
 			menu = new MainMenu();
 		return menu;
-	}
+	}  
 	
 	@Override
 	public Menu chooseOption(int option, User currentUser){

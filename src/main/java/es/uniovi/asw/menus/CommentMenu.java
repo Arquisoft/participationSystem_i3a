@@ -20,7 +20,7 @@ public class CommentMenu extends AbstractMenu{
 		System.out.println("TODO: votar un comentario positivo o negativo");
 	}
 	
-	private CommentMenu(){
+	private CommentMenu(){  
 		this.menuOptions.add("TODO");
 	}
 
