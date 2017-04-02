@@ -18,6 +18,7 @@ public class TestPls {
 		new CommentDao();
 		new ProposalDao();
 		new VoteDao();
+		new UserDao();
 		currUser = new User("Andrei Manu", 1679344);
 	}
 	
