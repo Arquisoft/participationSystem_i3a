@@ -9,14 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.uniovi.asw.PropReader;
+import es.uniovi.asw.kafka.KafkaProducer;
 import es.uniovi.asw.model.Proposal;
 import es.uniovi.asw.model.User;
 
 public class ProposalDao {
 	private static Connection conn;
-
+	private static KafkaProducer kfp;
 	public ProposalDao() {
 		try {
+			kfp = new KafkaProducer();
 			openConn();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -118,6 +120,7 @@ public class ProposalDao {
 		try {
 			if(exists(proposal)) {
 				VoteDao.SaveVotes(proposal);
+				kfp.SendMessage("Proposal", "Vote changed");
 				return 1;
 			}
 			
@@ -129,6 +132,7 @@ public class ProposalDao {
 			stmt.setString(4, proposal.getTitle());
 			stmt.setString(5, proposal.getCategory());
 			VoteDao.SaveVotes(proposal);
+			kfp.SendMessage("Proposal", "New Vote");
 			return stmt.executeUpdate();		
 
 		} catch (SQLException e) {
