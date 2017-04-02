@@ -14,22 +14,23 @@ public class Comment implements Filtrable,Removable{
 	private int id;
 	private String text;
 	// option 1
-	private Map<String, List<String>> votes;
+	private Map<String, List<User>> votes;
 	// option 2
 	//private List<User> positiveVotes, negativeVotes;
 	private User user;
-	private String date;
+	private java.sql.Date date;
 	private Proposal proposal;
 	
 	public Comment(User user, Proposal proposal, String text){
 		//this.id=ProposalDAO.getNumberOfProposal()+1; ??
-		this.votes = new HashMap<String, List<String>>();
-		this.votes.put("Positive", new ArrayList<String>());
-		this.votes.put("Negative", new ArrayList<String>());
+		this.votes = new HashMap<String, List<User>>();
+		this.votes.put("Positive", new ArrayList<User>());
+		this.votes.put("Negative", new ArrayList<User>());
 		this.user = user;
 		this.proposal = proposal;
 		this.text = text;
-		this.date = new SimpleDateFormat().format(new Date()); // ??
+		Date dt = new Date();
+		this.date = new java.sql.Date(dt.getDay(), dt.getMonth(), dt.getYear());
 	}
 	
 	/*
@@ -48,15 +49,15 @@ public class Comment implements Filtrable,Removable{
 		return text;
 	}
 
-	public Map<String, List<String>> getVotes() {
+	public Map<String, List<User>> getVotes() {
 		return votes;
 	}
 
-	public List<String> getPositiveVotes() {
+	public List<User> getPositiveVotes() {
 		return votes.get("Positive");
 	}
 	
-	public List<String> getNegativeVotes() {
+	public List<User> getNegativeVotes() {
 		return votes.get("Negative");
 	}
 	
@@ -64,7 +65,7 @@ public class Comment implements Filtrable,Removable{
 		return user;
 	}
 
-	public String getDate() {
+	public java.sql.Date getDate() {
 		return date;
 	}
 

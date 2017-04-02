@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import es.uniovi.asw.PropReader;
+import es.uniovi.asw.dao.ProposalDao;
 import es.uniovi.asw.filters.Filter;
 import es.uniovi.asw.model.filtrable.Filtrable;
 
@@ -24,7 +25,7 @@ public class Proposal implements Filtrable {
 	private String title;
 
 	public Proposal(int minimalNumberVotes, User user, String category, String text) {
-		// this.id=ProposalDAO.getNumberOfProposal()+1; ??
+		this.id=ProposalDao.getNewIdNumber()+1;
 		this.minimal = minimalNumberVotes;
 		this.votes = new HashMap<String, List<User>>();
 		votes.put("Positive", new ArrayList<User>());

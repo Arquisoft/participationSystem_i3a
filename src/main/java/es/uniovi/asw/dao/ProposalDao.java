@@ -102,10 +102,12 @@ public class ProposalDao {
 		try {
 			PreparedStatement stmt = conn.prepareStatement(PropReader.get("PROPOSAL_INSERT"));
 
-			stmt.setInt(1, proposal.getUser().getId());
-			stmt.setString(2, proposal.getCategory());
-			stmt.setString(3, proposal.getTitle());
-			stmt.setString(4, proposal.getText());
+			stmt.setInt(1, proposal.getId());
+			stmt.setInt(2, proposal.getMinimal());
+			stmt.setString(3, proposal.getText());
+			stmt.setInt(4, proposal.getUser().getId());
+			stmt.setString(5, proposal.getTitle());
+			stmt.setString(6, proposal.getCategory());
 			VoteDao.SaveVotes(proposal);
 			return stmt.executeUpdate();		
 
@@ -134,4 +136,20 @@ public class ProposalDao {
 		}
 		return ret;
 	}
+
+		public static int getNewIdNumber() {
+			try {
+				PreparedStatement stmt = conn.prepareStatement(PropReader.get("PROPOSAL_NEW_ID"));
+				
+				ResultSet rs = stmt.executeQuery();
+				
+			if(rs.next())
+				return rs.getInt(1);
+			
+			return 0;
+				
+			} catch (SQLException e) {
+				return 0;		
+			}
+		}
 }

@@ -2,6 +2,7 @@ package es.uniovi.asw.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import es.uniovi.asw.PropReader;
@@ -32,7 +33,18 @@ public class CommentDao {
 	}
 	
 	public static int save(Comment comment) {
-		System.out.println("Comentario guardado");
-		return 1;
+		try {
+			PreparedStatement stmt = conn.prepareStatement(PropReader.get("COMMENT_INSERT"));
+
+			stmt.setInt(1, comment.getUser().getId());
+			stmt.setDate(3, comment.getDate());
+			stmt.setString(2, comment.getText());
+			stmt.setString(4, comment.getText());
+			
+			return stmt.executeUpdate();		
+
+		} catch (SQLException e) {
+			return 0;		
+		}
 	}
 }
