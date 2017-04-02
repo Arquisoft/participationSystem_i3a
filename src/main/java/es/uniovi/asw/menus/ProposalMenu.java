@@ -63,7 +63,7 @@ public class ProposalMenu extends AbstractMenu{
 	public void listProposalTitles(){ 
 		int counter = 1;
 		for (Proposal prop : ProposalDao.getAllProposals()){
-			System.out.println(counter + ". " + prop.getTitle());
+			System.out.println("> " + counter + ". " + prop.getTitle());
 			counter++;
 		} 
 	}
@@ -81,13 +81,10 @@ public class ProposalMenu extends AbstractMenu{
 				prop.AddNegative(currentUser);
 			else
 				System.out.println("Invalid choice");
+			
 			ProposalDao.save(prop);
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("That's not valid");
 		}
 	}
 	
