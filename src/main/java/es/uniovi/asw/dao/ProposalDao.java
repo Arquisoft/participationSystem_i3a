@@ -89,7 +89,7 @@ public class ProposalDao {
 			while (rs.next()){
 				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("USERID")),
 										rs.getString("Title"),rs.getString("Category"),rs.getString("text"));
-				prop.SetID(rs.getInt("ID"));
+				prop.SetID(rs.getInt("ID")); 
 				VoteDao.SetVotes(prop);
 				propos.add(prop);
 			} 

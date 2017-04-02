@@ -65,7 +65,7 @@ public class ProposalMenu extends AbstractMenu{
 		for (Proposal prop : ProposalDao.getAllProposals()){
 			System.out.println(counter + ". " + prop.getTitle());
 			counter++;
-		}
+		} 
 	}
 	
 	public void voteProposal(User currentUser){
