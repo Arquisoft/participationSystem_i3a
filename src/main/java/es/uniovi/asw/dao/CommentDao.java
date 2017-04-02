@@ -34,12 +34,11 @@ public class CommentDao {
 	
 	public static int save(Comment comment) {
 		try {
-			PreparedStatement stmt = conn.prepareStatement(PropReader.get("COMMENT_INSERT"));
-
-			stmt.setInt(1, comment.getUser().getId());
-			stmt.setDate(3, comment.getDate());
-			stmt.setString(2, comment.getText());
-			stmt.setString(4, comment.getText());
+			PreparedStatement stmt = conn.prepareStatement(PropReader.get("COMM_INSERT"));
+			stmt.setString(1, comment.getText());
+			stmt.setInt(2, comment.getUser().getId());
+			stmt.setInt(3, comment.getProposal().getId());
+			stmt.setDate(4, comment.getDate());
 			
 			return stmt.executeUpdate();		
 

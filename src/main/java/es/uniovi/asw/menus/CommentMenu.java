@@ -28,7 +28,7 @@ public class CommentMenu extends AbstractMenu{
 		try {
 			System.out.println("Please choose which proposal to comment");
 
-			Proposal propos = ProposalDao.getAllProposals().get(Integer.parseInt(console.readLine()));
+			Proposal propos = ProposalDao.getAllProposals().get(Integer.parseInt(console.readLine())-1);
 			
 			System.out.println("You've chosen " + propos.getTitle());
 			System.out.println("Write your comment:");
