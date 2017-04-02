@@ -1,6 +1,7 @@
 package es.uniovi.asw.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -37,9 +38,9 @@ public class CommentDao {
 		try {
 			PreparedStatement stmt = conn.prepareStatement(PropReader.get("COMMENT_INSERT"));
 
-			stmt.setInt(1, proposal.getUser().getId());
-			stmt.setString(2, proposal.getCategory());
-			stmt.setString(3, proposal.getTitle());
+			stmt.setInt(1, comment.getUser().getId());
+			stmt.setString(2, comment.getText());
+			stmt.setString(3, ¡¡fecha!!);
 			stmt.setString(4, proposal.getText());
 			
 			return stmt.executeUpdate();		

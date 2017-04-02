@@ -40,26 +40,8 @@ public class UserDao {
 	public static User getUserByName(String userName) {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(PropReader.get("USER_BY_NAME"));
-<<<<<<< HEAD
-			
-			ResultSet rs = pstmt.executeQuery();
-			
-			if (rs.next()){
-				return new User(rs.getString("Fname"), rs.getInt("id"));
-			}
-		} catch (SQLException e) {
-			return null;
-		}
-		return null;
-	}
-	
-	public static User getUserById(int id) {
-		try {
-			PreparedStatement pstmt = conn.prepareStatement(PropReader.get("USER_BY_ID"));
-=======
 			pstmt.setString(1, userName);
 			ResultSet rs = pstmt.executeQuery();
->>>>>>> 0f94619c625262d4abb641d4cc6b50b8d17b6cca
 			
 			if (rs.next()){
 				User res = new User(rs.getString("Name"), rs.getInt("ID"));
@@ -71,6 +53,7 @@ public class UserDao {
 		}
 		return null;
 	}
+	
 	
 	public static User getUserByID(int ID) {
 		try {

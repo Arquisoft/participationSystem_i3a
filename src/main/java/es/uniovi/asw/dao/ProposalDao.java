@@ -43,12 +43,13 @@ public class ProposalDao {
 			pstmt.setInt(1, min);
 			ResultSet rs = pstmt.executeQuery();
 
-			if (rs.next()) {
+			while (rs.next()) {
 				UserDao.getUserByName("");
 				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("USERID")), rs.getString("Title"),
 						rs.getString("Category"), rs.getString("Text"));
 				User res = new User(rs.getString("Name"), rs.getInt("ID"));
 				res.setGender(rs.getInt("Gender") == 0 ? false : true);
+				VoteDao.SetVotes(prop);
 				ret.add(prop);
 			}
 		} catch (SQLException e) {
@@ -63,12 +64,12 @@ public class ProposalDao {
 			PreparedStatement pstmt = conn.prepareStatement(PropReader.get("PROPOSAL_BY_USER_ID"));
 			pstmt.setInt(1, UserID);
 			ResultSet rs = pstmt.executeQuery();
-			if (rs.next()) {
-				UserDao.getUserByName("");
+			while (rs.next()) {
 				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("USERID")), rs.getString("Title"),
 						rs.getString("Category"), rs.getString("Text"));
 				User res = new User(rs.getString("Name"), rs.getInt("ID"));
 				res.setGender(rs.getInt("Gender") == 0 ? false : true);
+				VoteDao.SetVotes(prop);
 				ret.add(prop);
 			}
 		} catch (SQLException e) {
@@ -86,8 +87,10 @@ public class ProposalDao {
 			List<Proposal> propos = new ArrayList<Proposal>();
 			
 			while (rs.next()){
-				propos.add(new Proposal(UserDao.getUserById(rs.getInt("USERID")),
-										rs.getString("Title"),rs.getString("Category"),rs.getString("text")));
+				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("USERID")),
+										rs.getString("Title"),rs.getString("Category"),rs.getString("text"));
+				VoteDao.SetVotes(prop);
+				propos.add(prop);
 			}
 			return propos;
 		} catch (SQLException e) {
@@ -103,7 +106,7 @@ public class ProposalDao {
 			stmt.setString(2, proposal.getCategory());
 			stmt.setString(3, proposal.getTitle());
 			stmt.setString(4, proposal.getText());
-			
+			VoteDao.SaveVotes(proposal);
 			return stmt.executeUpdate();		
 
 		} catch (SQLException e) {
@@ -118,12 +121,12 @@ public class ProposalDao {
 			pstmt.setString(1, category);
 			ResultSet rs = pstmt.executeQuery();
 
-			if (rs.next()) {
-				UserDao.getUserByName("");
+			while (rs.next()) {
 				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("USERID")), rs.getString("Title"),
 						rs.getString("Category"), rs.getString("Text"));
 				User res = new User(rs.getString("Name"), rs.getInt("ID"));
 				res.setGender(rs.getInt("Gender") == 0 ? false : true);
+				VoteDao.SetVotes(prop);
 				ret.add(prop);
 			}
 		} catch (SQLException e) {
