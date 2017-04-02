@@ -1,5 +1,6 @@
 package es.uniovi.asw.filters;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import es.uniovi.asw.model.Comment;
@@ -13,7 +14,8 @@ public class Chronological implements Filter{
 		
 		
 		List<Comment> lst = (List<Comment>) listOfFiltables.stream().filter(x -> x instanceof Comment);
-		List<Filtrable> ret = (List<Filtrable>) lst.stream().map( x -> x.getDate().orderBy(x.getDate()));
+	//	List<Filtrable> ret = (List<Filtrable>) lst.stream().map( x -> x.getDate().orderBy(x.getDate()));
+		List<Filtrable> ret = new ArrayList<Filtrable>();
 		return ret;
 	}
 }

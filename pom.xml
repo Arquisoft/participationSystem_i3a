@@ -13,13 +13,19 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.4.4.RELEASE</version>
 	</parent>
-	
+
 	<dependencies>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bus-kafka</artifactId>
-        </dependency>
-        
+		<dependency>
+			<groupId>io.gatling.highcharts</groupId>
+			<artifactId>gatling-charts-highcharts</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bus-kafka</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -69,7 +75,26 @@
 
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
-		<plugins>
+		<plugins><plugin>
+            <groupId>net.alchim31.maven</groupId>
+            <artifactId>scala-maven-plugin</artifactId>
+            <version>3.2.2</version>
+        </plugin>
+        <plugin>
+            <groupId>io.gatling</groupId>
+            <artifactId>gatling-maven-plugin</artifactId>
+            <version>2.0.0</version>
+            <configuration>
+                <jvmArgs>
+                    <jvmArg>-Durl=http://localhost:9000</jvmArg>
+                    <jvmArg>-DnumberOfUsers=10</jvmArg>
+                    <jvmArg>-DnumberOfRepetitions=1</jvmArg>
+                    <jvmArg>-DdurationMinutes=1</jvmArg>
+                    <jvmArg>-DpauseBetweenRequestsMs=3000</jvmArg>
+                    <jvmArg>-Ddebug=true</jvmArg>
+                </jvmArgs>
+            </configuration>
+        </plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -94,7 +119,7 @@
 				</executions>
 			</plugin>
 		</plugins>
-		
+
 	</build>
 
 	<reporting>

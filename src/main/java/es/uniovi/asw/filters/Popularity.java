@@ -2,6 +2,7 @@ package es.uniovi.asw.filters;
 
 import java.util.List;
 
+import es.uniovi.asw.model.Comment;
 import es.uniovi.asw.model.filtrable.Filtrable;
 
 public class Popularity implements Filter{
