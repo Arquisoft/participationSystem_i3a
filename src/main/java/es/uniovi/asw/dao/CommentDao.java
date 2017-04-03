@@ -41,6 +41,11 @@ public class CommentDao {
 	  
 	public static int save(Comment comment) {
 		try {
+			String[] notAllowed = PropReader.get("notAllowedWords").toString().split(",");
+			for(String s : notAllowed) {
+				if(comment.getText().contains(s))
+					throw new IllegalArgumentException("Word not allowed: " + s);
+			}
 			PreparedStatement stmt = conn.prepareStatement(PropReader.get("COMM_INSERT"));
 			stmt.setString(1, comment.getText());
 			stmt.setInt(2, comment.getUser().getId());

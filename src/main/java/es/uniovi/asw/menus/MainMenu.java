@@ -31,11 +31,11 @@ public class MainMenu extends AbstractMenu{
 			ProposalMenu.getInstance().voteProposal(currentUser);
 			return getInstance();
 		}
-		if (option == 5){
-			ProposalMenu.getInstance().listProposalTitles();
-			CommentMenu.getInstance().voteComment(currentUser);
-			return getInstance();
-		}
+		//if (option == 5){
+			//ProposalMenu.getInstance().listProposalTitles();
+			//CommentMenu.getInstance().voteComment(currentUser);
+			//return getInstance();
+		//}
 		throw new IllegalArgumentException();
 	}
 	
@@ -44,6 +44,6 @@ public class MainMenu extends AbstractMenu{
 		this.menuOptions.add(PropReader.get("mainMenuOption2"));
 		this.menuOptions.add(PropReader.get("mainMenuOption3"));
 		this.menuOptions.add(PropReader.get("mainMenuOption4"));
-		this.menuOptions.add(PropReader.get("mainMenuOption5"));
+		//this.menuOptions.add(PropReader.get("mainMenuOption5"));
 	}
 }

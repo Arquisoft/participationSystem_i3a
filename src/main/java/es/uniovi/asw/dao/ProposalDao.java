@@ -121,7 +121,11 @@ public class ProposalDao {
 				kfp.SendMessage("Proposal", "Vote changed");
 				return 1;
 			}
-			
+			String[] notAllowed = PropReader.get("notAllowedWords").toString().split(",");
+			for(String s : notAllowed) {
+				if(proposal.getText().contains(s))
+					throw new IllegalArgumentException("Word not allowed: " + s);
+			}
 			PreparedStatement stmt = conn.prepareStatement(PropReader.get("PROPOSAL_INSERT"));
 
 			stmt.setInt(1, proposal.getMinimal());
