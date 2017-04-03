@@ -13,7 +13,7 @@ public class Main {
 	private static User currentUser = null;
 
 	public static void main (String[] args){
-		//logUser();
+		logUser();
 		/* Users:
 		 * ID		NAME					EMAIL					  GENDER
 		 * 1		Jorge Tarari		jorge@example.cpm				1
@@ -22,11 +22,12 @@ public class Main {
 		 *19160962	Luis Lopez Fernando	luis@example.com				1
 		 *90500084	Juan Torres Pardo	juan@example.com				1
 		 */
-		currentUser = new User("Andrei Manu", 1679344);
+		///currentUser = new User("Andrei Manu", 1679344);
 		mainMenu();  
 	}
 	
 	private static User logUser(){
+		new UserDao();
 		try {
 			while (currentUser == null) {
 				System.out.println("Log with a valid user (National ID)");
