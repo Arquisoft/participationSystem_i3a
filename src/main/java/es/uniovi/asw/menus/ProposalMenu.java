@@ -41,8 +41,14 @@ public class ProposalMenu extends AbstractMenu{
 			
 			System.out.println(proposal.toString());
 			new ProposalDao();
+			int result = 0;
 			// Meter en base de datos
-			int result = new ProposalDao().save(proposal);
+			try {
+				result = new ProposalDao().save(proposal);
+			}
+			catch(IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+			}
 			
 			if (result == 0)
 				System.out.println("There was an error in the proposal creation.");
