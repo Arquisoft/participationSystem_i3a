@@ -47,7 +47,8 @@ public class CommentMenu extends AbstractMenu{
 			VoteDao.SaveVotes(comm);
 			
 		} catch (Exception e) {
-e.printStackTrace();		}
+			e.printStackTrace();		
+			}
 		
 		System.out.println("TODO: votar un comentario positivo o negativo");
 	}
@@ -78,7 +79,7 @@ e.printStackTrace();		}
 			propos.addComment(comment);
 			
 			System.out.println(propos.toString());
-			System.out.println(propos.getComments().get(0).toString());
+			//System.out.println(propos.getComments().get(0).toString());
 			
 			CommentDao.save(comment);
 			

@@ -70,6 +70,7 @@ public class ProposalDao {
 				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("UserID")), rs.getString("Title"),
 						rs.getString("Category"), rs.getString("Text"));
 				VoteDao.SetVotes(prop);
+				prop.setComments(CommentDao.getCommentsOf(prop));
 				ret.add(prop);
 			}
 		} catch (SQLException e) {
@@ -91,6 +92,7 @@ public class ProposalDao {
 										rs.getString("Title"),rs.getString("Category"),rs.getString("text"));
 				prop.SetID(rs.getInt("ID")); 
 				VoteDao.SetVotes(prop);
+				prop.setComments(CommentDao.getCommentsOf(prop));
 				propos.add(prop);
 			} 
 			return propos;
@@ -155,6 +157,7 @@ public class ProposalDao {
 				User res = new User(rs.getString("Name"), rs.getInt("ID"));
 				res.setGender(rs.getInt("Gender") == 0 ? false : true);
 				VoteDao.SetVotes(prop);
+				prop.setComments(CommentDao.getCommentsOf(prop));
 				ret.add(prop);
 			}
 		} catch (SQLException e) {

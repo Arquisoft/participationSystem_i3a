@@ -59,7 +59,7 @@ public class CommentDao {
 		}
 	}
 	
-	public List<Filtrable> getCommentsOf(Proposal proposal){
+	public static List<Filtrable> getCommentsOf(Proposal proposal){
 		try {
 			PreparedStatement stmt = conn.prepareStatement(PropReader.get("COMMENT_BY_PROPOSAL"));
 			stmt.setInt(1, proposal.getId());
