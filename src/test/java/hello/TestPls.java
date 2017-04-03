@@ -23,7 +23,6 @@ public class TestPls {
 	}
 	
 	
-	
 	@Test
 	public void TestInsertProposal() {
 		Proposal prop = new Proposal(currUser, "Testing", "TestCategory", "TestText");

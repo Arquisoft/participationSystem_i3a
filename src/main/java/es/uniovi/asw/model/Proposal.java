@@ -112,8 +112,8 @@ public class Proposal implements Filtrable {
 
 	@Override
 	public String toString() {
-		return "Proposal [id=" + id + ", minimal=" + minimal + ", votes=" + votes + ", comments=" + comments
-				+ ", category=" + category + ", text=" + text + ", user=" + user + "]";
+		return "Proposal [Positive votes=" + votes.get("Positive").size() + ", Negative votes = " + votes.get("Negative").size() 
+				+ ", comments=" + comments.size()	+ ", category=" + category + ", text=" + text + ", user=" + user.getName() + "]";
 	}
 
 	public String getTitle() {
