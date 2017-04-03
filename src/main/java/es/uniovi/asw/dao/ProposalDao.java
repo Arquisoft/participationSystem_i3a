@@ -72,7 +72,7 @@ public class ProposalDao {
 				VoteDao.SetVotes(prop);
 				prop.setComments(CommentDao.getCommentsOf(prop));
 				ret.add(prop);
-			}
+			} 
 		} catch (SQLException e) {
 			return null;
 		}

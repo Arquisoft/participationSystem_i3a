@@ -52,7 +52,7 @@ public class CommentMenu extends AbstractMenu{
 		
 		System.out.println("TODO: votar un comentario positivo o negativo");
 	}
-	
+	 
 	private void showCommentsOf(Proposal proposal) {
 		int counter = 1;
 		for (Filtrable comment : proposal.getComments()){
