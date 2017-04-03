@@ -40,7 +40,7 @@ public class UserDao {
 	public static User getUserByName(String userName) {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(PropReader.get("USER_BY_NAME"));
-			pstmt.setString(1, userName);
+			pstmt.setInt(1, Integer.parseInt(userName));
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()){
