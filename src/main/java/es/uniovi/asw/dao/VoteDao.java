@@ -8,10 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.asw.model.User;
 import es.uniovi.asw.PropReader;
 import es.uniovi.asw.model.Comment;
 import es.uniovi.asw.model.Proposal;
-import es.uniovi.asw.model.User;
 
 public class VoteDao {
 	private static Connection conn;
@@ -40,14 +40,14 @@ public class VoteDao {
 	public static void SetVotes(Proposal prop) {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(PropReader.get("VOTE_PROP"));
-			pstmt.setInt(1, prop.getId());
+			pstmt.setString(1, prop.getId());
 			ResultSet rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 				if(rs.getInt("Type") == 1) 
-					prop.AddPositive(UserDao.getUserByID(rs.getInt("VotUserID")));
+					prop.upvote(UserDao.getUserByID(rs.getInt("VotUserID")).getId());
 				else
-					prop.AddNegative(UserDao.getUserByID(rs.getInt("VotUserID")));
+					prop.downvote(UserDao.getUserByID(rs.getInt("VotUserID")).getId());
 					
 			}
 		} catch (SQLException e) {
@@ -56,20 +56,20 @@ public class VoteDao {
 	}
 
 	public static void SaveVotes(Comment com) {
-		List<User> pos = com.getPositiveVotes();
-		List<User> neg = com.getNegativeVotes();
-		for (User us : pos) {
-			InsertVotesCom(com.getId(), us.getId(), 1);
-		}
-		for (User us : neg) {
-			InsertVotesCom(com.getId(), us.getId(), 0);
-		}
+		//List<User> pos = com.get
+		//List<User> neg = com.getNegativeVotes();
+		//for (User us : pos) {
+		//	InsertVotesCom(com.getId(), us.getId(), 1);
+		//}
+		//for (User us : neg) {
+		//	InsertVotesCom(com.getId(), us.getId(), 0);
+		//}
 	}
-	private static int InsertVotesCom(int PropID, int UserID, int Type) {
+	private static int InsertVotesCom(String idCom, String idUser, int Type) {
 		try {
 			PreparedStatement stmt = conn.prepareStatement(PropReader.get("VOTE_INSERT_COMM"));
-			stmt.setInt(1, PropID);
-			stmt.setInt(2, UserID);
+			stmt.setString(1, idCom);
+			stmt.setString(2, idUser);
 			stmt.setInt(3, Type);
 			return stmt.executeUpdate();
 
@@ -79,14 +79,14 @@ public class VoteDao {
 	}
 	 
 	public static void SaveVotes(Proposal prop) {
-		List<User> pos = prop.getPositiveVotes();
+		/*List<User> pos = prop.getPositiveVotes();
 		List<User> neg = prop.getNegativeVotes();
 		for (User us : pos) {
 			InsertVotesProp(prop.getId(), us.getId(), 1);
 		}
 		for (User us : neg) {
 			InsertVotesProp(prop.getId(), us.getId(), 0);
-		}
+		}*/
 	}
 
 	private static boolean Exists(int PropID, int UserID) {

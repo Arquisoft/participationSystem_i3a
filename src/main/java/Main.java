@@ -2,16 +2,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import es.asw.model.User;
 import es.uniovi.asw.dao.UserDao;
 import es.uniovi.asw.menus.MainMenu;
 import es.uniovi.asw.menus.Menu;
-import es.uniovi.asw.model.User;
 
 public class Main {
-
+	
 	private static BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 	private static User currentUser = null;
-
+	
 	public static void main (String[] args){
 		logUser();
 		/* Users:

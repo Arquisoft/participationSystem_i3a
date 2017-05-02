@@ -1,13 +1,14 @@
 package es.uniovi.asw.menus;
 
+import java.util.HashMap;
 import java.util.List;
 
+import es.asw.model.User;
 import es.uniovi.asw.dao.CommentDao;
 import es.uniovi.asw.dao.ProposalDao;
 import es.uniovi.asw.dao.VoteDao;
 import es.uniovi.asw.model.Comment;
 import es.uniovi.asw.model.Proposal;
-import es.uniovi.asw.model.User;
 import es.uniovi.asw.model.filtrable.Filtrable;
 
 public class CommentMenu extends AbstractMenu{
@@ -29,7 +30,7 @@ public class CommentMenu extends AbstractMenu{
 			System.out.println("Choose the comment you want to vote");
 			Proposal propos = ProposalDao.getAllProposals().get(proposal-1);
 			
-			propos.setComments(new CommentDao().getCommentsOf(propos));
+			propos.setComments((HashMap<String, Comment>) new CommentDao().getCommentsOf(propos));
 			
 			showCommentsOf(propos);
 			
@@ -40,9 +41,9 @@ public class CommentMenu extends AbstractMenu{
 			System.out.println("Press 1 to vote positive and 2 to vote negative");
 			String choice = console.readLine();
 			if("1".equals(choice))
-				comm.AddPositive(currentUser);
+				comm.upvote(currentUser.getId());
 			else if(("2").equals(choice))
-				comm.AddNegative(currentUser);
+				comm.downvote(currentUser.getId());
 			
 			VoteDao.SaveVotes(comm);
 			
@@ -55,8 +56,8 @@ public class CommentMenu extends AbstractMenu{
 	 
 	private void showCommentsOf(Proposal proposal) {
 		int counter = 1;
-		for (Filtrable comment : proposal.getComments()){
-			System.out.println(counter + ". " +((Comment) comment).getText());
+		for (Comment comment : proposal.getCommentsList()){
+			System.out.println(counter + ". " + comment.getContent());
 			counter++;
 		}
 	}
@@ -74,9 +75,9 @@ public class CommentMenu extends AbstractMenu{
 			System.out.println("You've chosen " + propos.getTitle());
 			System.out.println("Write your comment:");
 
-			Comment comment = new Comment(currentUser, propos, console.readLine());
+			Comment comment = new Comment(currentUser,console.readLine());
 			
-			propos.addComment(comment);
+			propos.getCommentsList().add(comment);
 			
 			System.out.println(propos.toString());
 			//System.out.println(propos.getComments().get(0).toString());

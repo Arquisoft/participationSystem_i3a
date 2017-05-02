@@ -5,7 +5,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.uniovi.asw.model.User;
+import es.asw.model.User;
+import es.uniovi.asw.model.*;
 
 public class AbstractMenu implements Menu{
 

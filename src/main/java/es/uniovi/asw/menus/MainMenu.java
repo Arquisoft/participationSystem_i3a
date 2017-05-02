@@ -1,7 +1,7 @@
 package es.uniovi.asw.menus;
 
+import es.asw.model.User;
 import es.uniovi.asw.PropReader;
-import es.uniovi.asw.model.User;
 
 public class MainMenu extends AbstractMenu{
 

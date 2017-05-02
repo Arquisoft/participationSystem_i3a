@@ -13,7 +13,7 @@ public class Popularity implements Filter{
 		
 		//FALTA ORDENAR
 		List<Comment> lst = (List<Comment>) listOfFiltables.stream().filter(x -> x instanceof Comment);
-		List<Filtrable> ret = (List<Filtrable>) lst.stream().map( x -> x.getPositiveVotes());
+		List<Filtrable> ret = (List<Filtrable>) lst.stream().map( x -> x.getUpvotes());
 		return ret;
 	}
 
