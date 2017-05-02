@@ -17,7 +17,7 @@ public class ProposalDao {
 	private static Connection conn;
 	private static KafkaProducer kfp;
 	public ProposalDao() { 
-		try {
+		try { 
 			kfp = new KafkaProducer();
 			openConn();
 		} catch (SQLException e) {

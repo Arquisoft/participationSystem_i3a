@@ -17,7 +17,7 @@ public class VoteDao {
 	private static Connection conn;
 
 	public VoteDao() {
-		try {
+		try { 
 			openConn();
 		} catch (SQLException e) {
 			e.printStackTrace();

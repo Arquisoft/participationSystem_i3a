@@ -8,7 +8,7 @@ public class CreateProposal {
     private String title;
     private String content;
     private String category;
-
+ 
     public String getTitle() {
         return title;
     }

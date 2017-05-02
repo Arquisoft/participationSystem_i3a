@@ -1,7 +1,7 @@
 package es.asw.model;
 
 import java.util.Collection;
-
+ 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.annotation.Id;

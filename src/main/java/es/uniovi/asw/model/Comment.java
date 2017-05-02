@@ -10,7 +10,7 @@ public class Comment extends AbstractVotable {
 
 	@Id
 	private String id;
-	private User user;
+	private User user; 
 	private String content;
 	private String idProposal;
 

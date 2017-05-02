@@ -11,7 +11,7 @@ import es.uniovi.asw.dao.VoteDao;
 import es.uniovi.asw.model.Proposal;
 
 public class ProposalMenu extends AbstractMenu{
-
+ 
 	private static ProposalMenu menu = null;
 	
 	public static ProposalMenu getInstance() {

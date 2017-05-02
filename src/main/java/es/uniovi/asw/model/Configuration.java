@@ -10,7 +10,7 @@ public class Configuration {
 	private int expirationDateDays;
 	private HashSet<String> notAllowedWords;
 	private int minimumSupportVotes;
-
+ 
 	private Configuration() {
 		this.categories = new ArrayList<>();
 		this.categories.add("Cat1");

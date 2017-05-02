@@ -1,6 +1,6 @@
 package es.uniovi.asw.model;
 
-import java.util.List;
+import java.util.List; 
 
 public class Util {
 

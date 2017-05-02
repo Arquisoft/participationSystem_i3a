@@ -10,7 +10,7 @@ import es.uniovi.asw.dao.VoteDao;
 import es.uniovi.asw.model.Comment;
 import es.uniovi.asw.model.Proposal;
 import es.uniovi.asw.model.filtrable.Filtrable;
-
+ 
 public class CommentMenu extends AbstractMenu{
 
 	private static CommentMenu menu = null;

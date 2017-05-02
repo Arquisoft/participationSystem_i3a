@@ -48,7 +48,7 @@ public class CommentDao {
 			}
 			PreparedStatement stmt = conn.prepareStatement(PropReader.get("COMM_INSERT"));
 			stmt.setString(1, comment.getContent());
-			stmt.setString(2, comment.getUser().getId());
+			stmt.setString(2, comment.getUser().getId()); 
 			stmt.setString(3, comment.getIdProposal());
 			//stmt.setDate(4, comment.getDate());
 			kfc.SendMessage("Comment", "New Comment");

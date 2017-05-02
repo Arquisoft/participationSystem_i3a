@@ -10,7 +10,7 @@ public class AbstractVotable implements Votable {
 	protected int negativeVotes;
 
 	AbstractVotable() {
-		this.votes = new HashMap<>();
+		this.votes = new HashMap<>(); 
 		this.positiveVotes = 0;
 		this.negativeVotes = 0;
 	}
