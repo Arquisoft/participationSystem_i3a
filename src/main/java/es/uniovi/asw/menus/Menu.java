@@ -1,9 +1,9 @@
 package es.uniovi.asw.menus;
-
-import es.uniovi.asw.model.User;
+;
 
 public interface Menu {
 
-	public Menu chooseOption(int option, User currentUser);
+	public Menu chooseOption(int option, es.asw.model.User currentUser);
 	public void showOptions();
 }
+ 

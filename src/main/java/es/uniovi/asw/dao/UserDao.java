@@ -5,15 +5,16 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import es.asw.model.User;
 import es.uniovi.asw.PropReader;
-import es.uniovi.asw.model.User;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.SQLException; 
 public class UserDao {
 	private static Connection conn;
 	
@@ -45,7 +46,7 @@ public class UserDao {
 			
 			if (rs.next()){
 				User res = new User(rs.getString("Name"), rs.getInt("ID"));
-				res.setGender(rs.getInt("Gender") == 0 ? false :  true);
+				//res.setGender(rs.getInt("Gender") == 0 ? false :  true);
 				return res;
 			}
 		} catch (SQLException e) {
@@ -63,7 +64,7 @@ public class UserDao {
 			
 			if (rs.next()){
 				User res = new User(rs.getString("Name"), rs.getInt("ID"));
-				res.setGender(rs.getInt("Gender") == 0 ? false :  true);
+				//res.setGender(rs.getInt("Gender") == 0 ? false :  true);
 				return res;
 			}
 		} catch (SQLException e) {
