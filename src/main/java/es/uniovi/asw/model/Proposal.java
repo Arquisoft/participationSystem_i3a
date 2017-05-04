@@ -162,4 +162,9 @@ public class Proposal extends AbstractVotable {
 				+ ", content='" + content + '\'' + ", expirationDate="
 				+ expirationDate + '}';
 	}
+
+	public int delete() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

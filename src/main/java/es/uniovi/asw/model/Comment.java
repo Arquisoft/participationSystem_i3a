@@ -87,4 +87,9 @@ public class Comment extends AbstractVotable {
 		return "Comment{" + "id='" + id + '\'' + ", user=" + user
 				+ ", content='" + content + '\'' + '}';
 	}
+
+	public int delete() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
