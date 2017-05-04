@@ -15,33 +15,23 @@ public class Proposal implements Filtrable {
 	private int id;
 	private int minimal;
 	// option 1
-	private Map<String, List<User>> votes;
-	// option 2
-	// private List<User> positiveVotes, negativeVotes;
+	//private Map<String, List<User>> votes;
+	//option 2
+	private List<User> positiveVotes, negativeVotes;
 	private List<Filtrable> comments;
 	private String category;
 	private String text;
 	private User user;
 	private String title;
 
-	public Proposal(int minimalNumberVotes, User user, String category, String text) {
+	public Proposal(int minimalNumberVotes, User user, String title, String category, String text) {
 		this.id=ProposalDao.getNewIdNumber()+1;
 		this.minimal = minimalNumberVotes;
-		this.votes = new HashMap<String, List<User>>();
-		votes.put("Positive", new ArrayList<User>());
-		votes.put("Negative", new ArrayList<User>());
-		this.comments = new ArrayList<Filtrable>();
-		this.category = category;
-		this.text = text;
-		this.user = user;
-	}
-
-
-	public Proposal(User user, String title, String category, String text) {
-		this.minimal = Integer.parseInt(PropReader.get("minimumVotesNumber"));
-		this.votes = new HashMap<String, List<User>>();
-		votes.put("Positive", new ArrayList<User>());
-		votes.put("Negative", new ArrayList<User>());
+		//this.votes = new HashMap<String, List<User>>();
+		//votes.put("Positive", new ArrayList<User>());
+		//votes.put("Negative", new ArrayList<User>());
+		this.positiveVotes = new ArrayList<User>();
+		this.negativeVotes = new ArrayList<User>();
 		this.comments = new ArrayList<Filtrable>();
 		this.category = category;
 		this.text = text;
@@ -49,12 +39,17 @@ public class Proposal implements Filtrable {
 		this.title = title;
 	}
 
+
+	public Proposal(User user, String title, String category, String text) {
+		this(Integer.parseInt(PropReader.get("minimumVotesNumber")), user, title, category, text);
+	}
+
 	public void AddPositive(User user) {
-		votes.get("Positive").add(user);
+		positiveVotes.add(user);
 	}
 
 	public void AddNegative(User user) {
-		votes.get("Negative").add(user);
+		negativeVotes.add(user);
 	}
 
 	/**
@@ -91,6 +86,9 @@ public class Proposal implements Filtrable {
 	}
 
 	public Map<String, List<User>> getVotes() {
+		Map<String, List<User>> votes = new HashMap<String, List<User>>();
+		votes.put("positive", this.getPositiveVotes());
+		votes.put("negative", this.getNegativeVotes());
 		return votes;
 	}
 
@@ -106,13 +104,9 @@ public class Proposal implements Filtrable {
 		return user;
 	}
 
-	public void SetUser(User user) {
-		this.user = user;
-	}
-
 	@Override
 	public String toString() {
-		return "Proposal [Positive votes=" + votes.get("Positive").size() + ", Negative votes = " + votes.get("Negative").size() 
+		return "Proposal [Positive votes=" + positiveVotes.size() + ", Negative votes = " + negativeVotes.size() 
 				+ ", comments=" + comments.size()	+ ", category=" + category + ", text=" + text + ", user=" + user.getName() + "]";
 	}
 
@@ -126,11 +120,11 @@ public class Proposal implements Filtrable {
 	}
 	
 	public List<User> getPositiveVotes() {
-		return votes.get("Positive");
+		return positiveVotes;
 	}
 
 	public List<User> getNegativeVotes() {
-		return votes.get("Negative");
+		return negativeVotes;
 	}
 
 
