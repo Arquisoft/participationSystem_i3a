@@ -2,16 +2,16 @@ package es.uniovi.asw.menus;
 
 import java.io.IOException;
 
-import es.asw.model.User;
 import es.uniovi.asw.dao.CategoryDao;
 import es.uniovi.asw.dao.CommentDao;
 import es.uniovi.asw.dao.ProposalDao;
 import es.uniovi.asw.dao.UserDao;
 import es.uniovi.asw.dao.VoteDao;
 import es.uniovi.asw.model.Proposal;
+import es.uniovi.asw.model.User;
 
 public class ProposalMenu extends AbstractMenu{
- 
+
 	private static ProposalMenu menu = null;
 	
 	public static ProposalMenu getInstance() {
@@ -82,9 +82,9 @@ public class ProposalMenu extends AbstractMenu{
 			System.out.println("Press 1 to vote positive and 2 to vote negative");
 			String choice = console.readLine();
 			if(choice.equals("1"))
-				prop.upvote(currentUser.getId());
+				prop.AddPositive(currentUser);
 			else if(choice.equals("2"))
-				prop.downvote(currentUser.getId());
+				prop.AddNegative(currentUser);
 			else
 				System.out.println("Invalid choice");
 			

@@ -8,16 +8,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.asw.model.User;
 import es.uniovi.asw.PropReader;
 import es.uniovi.asw.kafka.KafkaProducer;
 import es.uniovi.asw.model.Proposal;
+import es.uniovi.asw.model.User;
 
 public class ProposalDao {
 	private static Connection conn;
 	private static KafkaProducer kfp;
 	public ProposalDao() { 
-		try { 
+		try {
 			kfp = new KafkaProducer();
 			openConn();
 		} catch (SQLException e) {
@@ -50,7 +50,7 @@ public class ProposalDao {
 				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("USERID")), rs.getString("Title"),
 						rs.getString("Category"), rs.getString("Text"));
 				User res = new User(rs.getString("Name"), rs.getInt("ID"));
-				//res.setGender(rs.getInt("Gender") == 0 ? false : true);
+				res.setGender(rs.getInt("Gender") == 0 ? false : true);
 				VoteDao.SetVotes(prop);
 				ret.add(prop);
 			}
@@ -70,7 +70,7 @@ public class ProposalDao {
 				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("UserID")), rs.getString("Title"),
 						rs.getString("Category"), rs.getString("Text"));
 				VoteDao.SetVotes(prop);
-				//prop.setComments((CommentDao.getCommentsOf(prop).toArray());
+				prop.setComments(CommentDao.getCommentsOf(prop));
 				ret.add(prop);
 			} 
 		} catch (SQLException e) {
@@ -90,9 +90,9 @@ public class ProposalDao {
 			while (rs.next()){
 				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("USERID")),
 										rs.getString("Title"),rs.getString("Category"),rs.getString("text"));
-				prop.setId(rs.getString("ID")); 
+				prop.SetID(rs.getInt("ID")); 
 				VoteDao.SetVotes(prop);
-				//prop.setComments(CommentDao.getCommentsOf(prop));
+				prop.setComments(CommentDao.getCommentsOf(prop));
 				propos.add(prop);
 			} 
 			return propos;
@@ -104,7 +104,7 @@ public class ProposalDao {
 	private static boolean exists(Proposal proposal) {
 		try {
 			PreparedStatement stmt = conn.prepareStatement(PropReader.get("PROPOSAL_EXISTS"));
-			stmt.setString(1, proposal.getId());
+			stmt.setInt(1, proposal.getId());
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next())
 				return true;
@@ -125,24 +125,23 @@ public class ProposalDao {
 			}
 			String[] notAllowed = PropReader.get("notAllowedWords").toString().split(",");
 			for(String s : notAllowed) {
-				if(proposal.getContent().contains(s))
+				if(proposal.getText().contains(s))
 					throw new IllegalArgumentException("Word not allowed: " + s);
 			}
 			PreparedStatement stmt = conn.prepareStatement(PropReader.get("PROPOSAL_INSERT"));
 
-			/*stmt.setInt(1, proposal.getMinimal());
+			stmt.setInt(1, proposal.getMinimal());
 			stmt.setString(2, proposal.getText());
 			stmt.setInt(3, proposal.getUser().getId());
 			stmt.setString(4, proposal.getTitle());
 			stmt.setString(5, proposal.getCategory());
 			VoteDao.SaveVotes(proposal);
 			kfp.SendMessage("Proposal", "New Vote");
-			return stmt.executeUpdate();		*/
+			return stmt.executeUpdate();		
 
 		} catch (SQLException e) {
 			return 0;		
 		}
-		return 0;
 	}
 	
 		public List<Proposal> GetProposalByCategory(String category) {
@@ -156,9 +155,9 @@ public class ProposalDao {
 				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("USERID")), rs.getString("Title"),
 						rs.getString("Category"), rs.getString("Text"));
 				User res = new User(rs.getString("Name"), rs.getInt("ID"));
-				//res.setGender(rs.getInt("Gender") == 0 ? false : true);
+				res.setGender(rs.getInt("Gender") == 0 ? false : true);
 				VoteDao.SetVotes(prop);
-				//prop.setComments(CommentDao.getCommentsOf(prop));
+				prop.setComments(CommentDao.getCommentsOf(prop));
 				ret.add(prop);
 			}
 		} catch (SQLException e) {
