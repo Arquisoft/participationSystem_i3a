@@ -12,7 +12,6 @@ import cucumber.api.junit.Cucumber;
 import es.uniovi.asw.model.*;
 import es.uniovi.asw.dao.*;
 public class TestPls {
-	/*
 	private static User currUser;
 	@Before
 	public void Setup() {
@@ -74,5 +73,5 @@ public class TestPls {
 		int posVotes2 = prop.getNegativeVotes().size();
 		assert(posVotes1 < posVotes2);
 		
-	} */
+	}
 }
