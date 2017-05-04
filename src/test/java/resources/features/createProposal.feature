@@ -3,5 +3,7 @@ Feature: Be able to create a proposal
 	
 Scenario: Create a proposal
 	Given a login user
-	When creating the proposal
-	Then the system must have my proposal
+	When i write the proposal's content
+	And i write the proposal's title
+	And i select the proposal's category
+	Then my proposal must be published

@@ -8,4 +8,4 @@ Scenario: Login
 	|	pablo@gmail.com	|	xxx	|
 	
 	When inserting pablo@gmail.com and the password xxx
-	Then enter in session
+	Then i receive a welcome message
