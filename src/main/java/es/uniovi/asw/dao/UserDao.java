@@ -67,10 +67,10 @@ public class UserDao {
 		return null;
 	}
 
-	public static User getUserLog(String userName, String password) {
+	public static User getUserLog(int UserID, String password) {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(PropReader.get("USER_LOG"));
-			pstmt.setString(1, userName);
+			pstmt.setInt(1, UserID);
 			pstmt.setString(2, password);
 			ResultSet rs = pstmt.executeQuery();
 			

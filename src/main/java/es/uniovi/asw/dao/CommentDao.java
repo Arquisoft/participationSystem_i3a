@@ -68,7 +68,8 @@ public class CommentDao {
 			
 			List<Filtrable> comments = new ArrayList<Filtrable>();
 			while(rs.next()){
-				comments.add(new Comment(null, proposal, rs.getString("Text")));
+				new UserDao();
+				comments.add(new Comment(UserDao.getUserByID(rs.getInt("UserID")), proposal, rs.getString("Text")));
 			}
 			
 			return comments;

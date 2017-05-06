@@ -1,6 +1,7 @@
 package es.uniovi.asw.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -107,7 +108,7 @@ public class Proposal implements Filtrable {
 	@Override
 	public String toString() {
 		return "Proposal [Positive votes=" + positiveVotes.size() + ", Negative votes = " + negativeVotes.size() 
-				+ ", comments=" + comments.size()	+ ", category=" + category + ", text=" + text + ", user=" + user.getName() + "]";
+				+ ", comments=" + Arrays.toString(comments.toArray()) + ", category=" + category + ", text=" + text + ", user=" + user.getName() + "]";
 	}
 
 	public String getTitle() {

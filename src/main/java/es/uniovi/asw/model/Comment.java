@@ -80,4 +80,9 @@ public class Comment implements Filtrable,Removable{
 	public Proposal getProposal() {
 		return proposal;
 	}
+
+	@Override
+	public String toString() {
+		return "Comment [text=" + text + ", votes=" + votes + ", user=" + user + ", date=" + date + "]";
+	}
 }
