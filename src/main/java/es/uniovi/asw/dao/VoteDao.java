@@ -81,7 +81,7 @@ public class VoteDao {
 			InsertVotesCom(com.getId(), us.getId(), 0);
 		}
 	}
-	private static int InsertVotesCom(int PropID, int UserID, int Type) {
+	public static int InsertVotesCom(int PropID, int UserID, int Type) {
 		try {
 			PreparedStatement stmt = conn.prepareStatement(PropReader.get("VOTE_INSERT_COMM"));
 			stmt.setInt(1, PropID);
@@ -120,7 +120,7 @@ public class VoteDao {
 			return false;
 		}
 	}
-	private static int InsertVotesProp(int PropID, int UserID, int Type) {
+	public static int InsertVotesProp(int PropID, int UserID, int Type) {
 		try {
 			if(Exists(PropID, UserID)) {
 				PreparedStatement stmt = conn.prepareStatement(PropReader.get("VOTE_UPDATE"));
