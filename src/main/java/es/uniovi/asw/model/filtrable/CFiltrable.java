@@ -70,6 +70,6 @@ public class CFiltrable implements Filtrable{
 
 	@Override
 	public int compareByRatio(Filtrable o2) {
-		return Double.compare(this.getPositiveVotes().size() / this.getNegativeVotes().size(), o2.getPositiveVotes().size() / o2.getNegativeVotes().size());
+		return Double.compare(this.getPositiveVotes().size() / this.getNegativeVotes().size() == 0 ? 1 : this.getNegativeVotes().size(), o2.getPositiveVotes().size() / o2.getNegativeVotes().size() == 0 ? 1 : o2.getNegativeVotes().size());
 	}
 }
