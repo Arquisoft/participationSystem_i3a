@@ -3,7 +3,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
 import es.uniovi.asw.dao.UserDao;
+import es.uniovi.asw.kafka.KafkaConsumer;
 import es.uniovi.asw.menus.MainMenu;
 import es.uniovi.asw.menus.Menu;
 import es.uniovi.asw.model.User;
@@ -15,7 +19,21 @@ public class Main {
 
 	public static void main (String[] args){
 		logUser();
-		
+		Thread kafka = new Thread() {
+		    public void run() {
+		        KafkaConsumer kfc = new KafkaConsumer();
+		        kfc.Subscribe("votedProposal");
+		        kfc.Subscribe("votedComment" );
+		        kfc.Subscribe("createdProposal" );
+		        kfc.Subscribe("createdComment" );
+		        kfc.Subscribe("deletedProposal" );
+		        kfc.Read();
+		    }  
+		};
+		 Logger.getLogger("org").setLevel(Level.WARN);
+	      Logger.getLogger("akka").setLevel(Level.WARN);      
+	      Logger.getLogger("kafka").setLevel(Level.WARN);
+		kafka.run();
 		/* Users:
 		 * ID		NAME					EMAIL					  GENDER
 		 * 1		Jorge Tarari		jorge@example.cpm				1

@@ -12,7 +12,7 @@ public class KafkaConsumer {
 	public KafkaConsumer() {
 		if (kfc == null) {
 			Properties prop = new Properties();
-			prop.put("bootstrap.servers", "localhost:9092");
+			prop.put("bootstrap.servers", "localhost:2181");
 			prop.put("group.id", "test"); 
 			prop.put("enable.auto.commit", "true");
 			prop.put("auto.commit.interval.ms", "1000");
@@ -29,9 +29,12 @@ public class KafkaConsumer {
 
 	public void Read() {
 		while (true) {
-			ConsumerRecords<String, String> cr = kfc.poll(200);
+			try{
+			ConsumerRecords<String, String> cr = kfc.poll(Long.MAX_VALUE);
 			for (ConsumerRecord<String, String> record : cr)
 				System.out.println(record.key() + " : " + record.value());
+			}
+			catch(Exception e) { }
 		}
 	}
 }
