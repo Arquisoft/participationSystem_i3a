@@ -2,11 +2,8 @@ package es.uniovi.asw.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
 
 import es.uniovi.asw.model.filtrable.CFiltrable;
-import es.uniovi.asw.model.filtrable.Filtrable;
 
 public class Comment extends CFiltrable implements Removable{
 

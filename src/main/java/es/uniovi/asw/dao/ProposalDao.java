@@ -111,6 +111,17 @@ public class ProposalDao {
 			return false;
 		}
 	}
+	
+	public static int delete(Proposal proposal) {
+		try {
+			PreparedStatement stmt = conn.prepareStatement(PropReader.get("PROPOSAL_DELETE"));
+			stmt.setInt(1, proposal.getId());
+			return stmt.executeUpdate();
+		} catch (SQLException e) {
+			return 0;
+		}
+	}
+	
 	public static int save(Proposal proposal) {
 		
 		try {
