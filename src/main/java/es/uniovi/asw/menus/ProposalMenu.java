@@ -40,7 +40,6 @@ public class ProposalMenu extends AbstractMenu{
 			Proposal proposal = new Proposal(user, title, category, text);
 			
 			System.out.println(proposal.toString());
-			new ProposalDao();
 			int result = 0;
 			// Meter en base de datos
 			try {

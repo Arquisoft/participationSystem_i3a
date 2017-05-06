@@ -4,10 +4,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", gender=" + gender + "]";
+		return "User [id=" + DNI + ", name=" + name + ", email=" + email + ", gender=" + gender + "]";
 	}
 
-	private int id;
 	private String name;
 	private String LName;
 	private int DNI;
@@ -29,7 +28,7 @@ public class User {
 	}
 	
 	public int getId() {
-		return id;
+		return DNI;
 	}
 
 	public String getName() {

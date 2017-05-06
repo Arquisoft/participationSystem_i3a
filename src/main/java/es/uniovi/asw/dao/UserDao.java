@@ -39,8 +39,8 @@ public class UserDao {
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()){
-				User res = new User(rs.getString("FName"), rs.getString("LName"), rs.getInt("DNI"), rs.getString("email"), 
-						rs.getString("DOB"), rs.getInt("gender") == 0 ? false : true, rs.getString("password"), rs.getString("Address"));
+				User res = new User(rs.getString("FName"), rs.getString("LName"), rs.getInt("ID"), rs.getString("Email"), 
+						rs.getString("DOB"), rs.getInt("Gender") == 0 ? false : true, rs.getString("Password"), rs.getString("Address"));
 				return res;
 			}
 		} catch (SQLException e) {
@@ -57,8 +57,8 @@ public class UserDao {
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()){
-				User res = new User(rs.getString("FName"), rs.getString("LName"), rs.getInt("DNI"), rs.getString("email"), 
-						rs.getString("DOB"), rs.getInt("gender") == 0 ? false : true, rs.getString("password"), rs.getString("Address"));
+				User res = new User(rs.getString("FName"), rs.getString("LName"), rs.getInt("ID"), rs.getString("Email"), 
+						rs.getString("DOB"), rs.getInt("Gender") == 0 ? false : true, rs.getString("Password"), rs.getString("Address"));
 				return res;
 			}
 		} catch (SQLException e) {
@@ -75,8 +75,8 @@ public class UserDao {
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()){
-				User res = new User(rs.getString("FName"), rs.getString("LName"), rs.getInt("DNI"), rs.getString("email"), 
-						rs.getString("DOB"), rs.getInt("gender") == 0 ? false : true, rs.getString("password"), rs.getString("Address"));
+				User res = new User(rs.getString("FName"), rs.getString("LName"), rs.getInt("ID"), rs.getString("Email"), 
+						rs.getString("DOB"), rs.getInt("Gender") == 0 ? false : true, rs.getString("Password"), rs.getString("Address"));
 				return res;
 			}
 		} catch (SQLException e) {

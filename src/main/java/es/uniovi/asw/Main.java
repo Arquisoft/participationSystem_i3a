@@ -32,7 +32,7 @@ public class Main {
 		try {
 			while (currentUser == null) {
 				System.out.println("Log with a valid user (National ID)");
-				currentUser = UserDao.getUserByName(console.readLine());
+				currentUser = UserDao.getUserByID(Integer.parseInt(console.readLine()));
 			}
 		} catch (IOException e) {
 			currentUser = null;
