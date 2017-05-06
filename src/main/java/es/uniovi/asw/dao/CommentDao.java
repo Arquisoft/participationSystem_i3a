@@ -69,7 +69,7 @@ public class CommentDao {
 			List<Filtrable> comments = new ArrayList<Filtrable>();
 			while(rs.next()){
 				new UserDao();
-				Comment com = new Comment(UserDao.getUserByID(rs.getInt("UserID")), proposal, rs.getString("Text"), rs.getInt("Comment.ID"), rs.getString("Date"));
+				Comment com = new Comment(UserDao.getUserByID(rs.getInt("UserID")), proposal, rs.getString("Text"), rs.getInt("Comment.ID"), rs.getString("Comment.Date"));
 				new VoteDao();
 				VoteDao.SetVotes(com);
 				comments.add(com);

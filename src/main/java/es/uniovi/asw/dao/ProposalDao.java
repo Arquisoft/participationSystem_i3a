@@ -46,8 +46,8 @@ public class ProposalDao {
 
 			while (rs.next()) {
 				UserDao.getUserByName("");
-				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("USERID")), rs.getString("Title"),
-						rs.getString("Category"), rs.getString("Text"));
+				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("UserID")), rs.getString("Title"),
+						rs.getString("Category"), rs.getString("Text"), rs.getInt("ID"), rs.getString("Date"));
 				VoteDao.SetVotes(prop);
 				ret.add(prop);
 			}
@@ -65,7 +65,7 @@ public class ProposalDao {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("UserID")), rs.getString("Title"),
-						rs.getString("Category"), rs.getString("Text"));
+						rs.getString("Category"), rs.getString("Text"), rs.getInt("ID"), rs.getString("Date"));
 				VoteDao.SetVotes(prop);
 				prop.setComments(CommentDao.getCommentsOf(prop));
 				ret.add(prop);
@@ -85,9 +85,8 @@ public class ProposalDao {
 			List<Proposal> propos = new ArrayList<Proposal>();
 			
 			while (rs.next()){
-				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("USERID")),
-										rs.getString("Title"),rs.getString("Category"),rs.getString("text"));
-				prop.SetID(rs.getInt("ID")); 
+				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("UserID")), rs.getString("Title"),
+						rs.getString("Category"), rs.getString("Text"), rs.getInt("ID"), rs.getString("Date"));
 				VoteDao.SetVotes(prop);
 				prop.setComments(CommentDao.getCommentsOf(prop));
 				propos.add(prop);
