@@ -32,6 +32,10 @@
 					<td th:text="${p.getTitle()}"></td>
 					<td><a th:href="${'/selectProposal/' + p.getId()}"
 						class="btn btn-info" th:id="${p.getId()}">Comment</a></td>
+					<td><a th:href="${'/upvoteProposal/' + p.getId()}"
+						class="btn btn-info" th:id="${p.getId()}">Me Likey</a></td>
+					<td><a th:href="${'/downvoteProposal/' + p.getId()}"
+						class="btn btn-info" th:id="${p.getId()}">Nu-uh</a></td>
 				</tr>
 			</tbody>
 		</table>

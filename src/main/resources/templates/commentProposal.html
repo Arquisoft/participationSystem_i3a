@@ -31,17 +31,20 @@
 						<div>
 							<table class="table">
 								<tr th:each="c : ${p.getComments()}">
-									<div>
+									<td><div>
 										<div class="panel panel-default">
 											<div class="panel-heading">
-												<span class="text-muted"
-													th:text="${c.getUser().getName()}"></span>
+												<span class="text-muted" th:text="${c.getUser().getName()}"></span>
 											</div>
 											<div class="panel-body">
 												<p th:text="${c.getContent()}"></p>
 											</div>
 										</div>
-									</div>
+									</div></td>
+									<td><a th:href="${'/upvoteComment/' + p.getId()}"
+										class="btn btn-info" th:id="${p.getId()}">Me Likey</a></td>
+									<td><a th:href="${'/downvoteComment/' + p.getId()}"
+										class="btn btn-info" th:id="${p.getId()}">Nu-uh</a></td>
 								</tr>
 							</table>
 						</div>
