@@ -1,30 +1,39 @@
 package es.uniovi.asw.kafka;
 
-import java.util.Properties;
-import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.common.serialization.StringSerializer;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
+import org.springframework.util.concurrent.ListenableFuture;
+import org.springframework.util.concurrent.ListenableFutureCallback;
 
+import javax.annotation.ManagedBean;
+
+/**
+ * Created by herminio on 26/12/16.
+ */
+@ManagedBean
 public class KafkaProducer {
-	private static org.apache.kafka.clients.producer.KafkaProducer<String, String> kfp;
- 
-	public KafkaProducer() {
-		if (kfp == null) {
-			Properties prop = new Properties();
-			prop.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-	        prop.put(ProducerConfig.RETRIES_CONFIG, 0);
-	        prop.put(ProducerConfig.BATCH_SIZE_CONFIG, 16384);
-	        prop.put(ProducerConfig.LINGER_MS_CONFIG, 1);
-	        prop.put(ProducerConfig.BUFFER_MEMORY_CONFIG, 33554432);
-	        prop.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-	        prop.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-	        prop.setProperty(ProducerConfig.RECONNECT_BACKOFF_MS_CONFIG, "10000");
-			kfp = new org.apache.kafka.clients.producer.KafkaProducer<String, String>(prop);
-		}
 
+	private static final Logger logger = Logger.getLogger(KafkaProducer.class);
+
+	@Autowired
+	private KafkaTemplate<String, String> kafkaTemplate;
+
+	public void send(String topic, String data) {
+		kafkaTemplate = new KafkaProducerFactory().kafkaTemplate();
+		ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(topic, data);
+		future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
+			@Override
+			public void onSuccess(SendResult<String, String> result) {
+				logger.info("Success on sending message \"" + data + "\" to topic " + topic);
+			}
+
+			@Override
+			public void onFailure(Throwable ex) {
+				logger.error("Error on sending message \"" + data + "\", stacktrace " + ex.getMessage());
+			}
+		});
 	}
 
-	public void SendMessage(String topic, String message) {
-		//kfp.send(new ProducerRecord<String, String>(topic, message));
-		//kfp.close();
-	}
 }

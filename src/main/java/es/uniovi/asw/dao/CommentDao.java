@@ -51,7 +51,7 @@ public class CommentDao {
 			stmt.setInt(2, comment.getUser().getId());
 			stmt.setInt(3, comment.getProposal().getId());
 			stmt.setString(4, comment.getDate());
-			kfc.SendMessage("Comment", "New Comment");
+			kfc.send("createdComment", String.valueOf(comment.getId()));
 			return stmt.executeUpdate();		
 
 		} catch (SQLException e) {
