@@ -20,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 import es.uniovi.asw.Application;
 import es.uniovi.asw.UserInfo;
 
+@SuppressWarnings("deprecation")
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
@@ -40,7 +41,7 @@ public class MainControllerTest {
 
 	@Test
 	public void getLanding() throws Exception {
-		String userURI = base.toString() + "/user";  
+		base.toString();  
 		ResponseEntity<String> response = template.getForEntity(base.toString(), String.class);
 		assertThat(response.getBody(), containsString("Hola"));
 	}
@@ -48,8 +49,8 @@ public class MainControllerTest {
 	@Test
 	public void getUser() throws Exception {
 		String userURI = base.toString() + "/user";  
-		ResponseEntity<String> response = template.getForEntity(userURI, String.class);
-		UserInfo expected = new UserInfo("pepe",0);
+		template.getForEntity(userURI, String.class);
+		new UserInfo("pepe",0);
 	}
 
 }

@@ -12,7 +12,7 @@ Skeleton of participants module
 # Authors
 
 - Herminio García González (@herminiogg)
-- Jose Emilio Labra Gayo (@labra) 
+- Jose Emilio Labra Gayo (@labra)
 - Katia Fernández Fernández (@katiaff)
-- Christian Martínez Abad (@cmabad)
+- Christian Martínez (@cmabad)
 - Andrei Manu (@andreimanu)

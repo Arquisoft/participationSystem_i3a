@@ -1,18 +1,12 @@
 package hello;
 
-import static org.junit.Assert.*;
-
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import cucumber.api.junit.Cucumber;
 import es.uniovi.asw.model.*;
 import es.uniovi.asw.dao.*;
 public class TestPls {
-	/*
 	private static User currUser;
 	@Before
 	public void Setup() {
@@ -20,7 +14,7 @@ public class TestPls {
 		new ProposalDao();
 		new VoteDao();
 		new UserDao();
-		currUser = new User("Andrei Manu", 1679344);
+		currUser = UserDao.getUserByID(1679344);
 	}
 	
 	
@@ -74,5 +68,5 @@ public class TestPls {
 		int posVotes2 = prop.getNegativeVotes().size();
 		assert(posVotes1 < posVotes2);
 		
-	} */
+	}
 }

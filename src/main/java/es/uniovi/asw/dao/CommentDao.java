@@ -43,14 +43,14 @@ public class CommentDao {
 		try {
 			String[] notAllowed = PropReader.get("notAllowedWords").toString().split(",");
 			for(String s : notAllowed) {
-				if(comment.getContent().contains(s))
+				if(comment.getText().contains(s))
 					throw new IllegalArgumentException("Word not allowed: " + s);
 			}
 			PreparedStatement stmt = conn.prepareStatement(PropReader.get("COMM_INSERT"));
-			stmt.setString(1, comment.getContent());
-			stmt.setString(2, comment.getUser().getId()); 
-			stmt.setString(3, comment.getIdProposal());
-			//stmt.setDate(4, comment.getDate());
+			stmt.setString(1, comment.getText());
+			stmt.setInt(2, comment.getUser().getId());
+			stmt.setInt(3, comment.getProposal().getId());
+			stmt.setDate(4, comment.getDate());
 			kfc.SendMessage("Comment", "New Comment");
 			return stmt.executeUpdate();		
 
@@ -59,16 +59,16 @@ public class CommentDao {
 		}
 	}
 	
-	public static List<Comment> getCommentsOf(Proposal proposal){
+	public static List<Filtrable> getCommentsOf(Proposal proposal){
 		try { 
 			PreparedStatement stmt = conn.prepareStatement(PropReader.get("COMMENT_BY_PROPOSAL"));
-			stmt.setString(1, proposal.getId());
+			stmt.setInt(1, proposal.getId());
 			
 			ResultSet rs = stmt.executeQuery();		
 			
-			List<Comment> comments = new ArrayList<Comment>();
+			List<Filtrable> comments = new ArrayList<Filtrable>();
 			while(rs.next()){
-				comments.add(new Comment(null, rs.getString("Text")));
+				comments.add(new Comment(null, proposal, rs.getString("Text")));
 			}
 			
 			return comments;

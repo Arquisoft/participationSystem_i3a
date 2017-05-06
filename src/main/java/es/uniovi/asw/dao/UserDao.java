@@ -6,15 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import es.asw.model.User;
+import es.uniovi.asw.model.User;
 import es.uniovi.asw.PropReader;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException; 
 public class UserDao {
 	private static Connection conn;
 	
@@ -41,12 +35,12 @@ public class UserDao {
 	public static User getUserByName(String userName) {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(PropReader.get("USER_BY_NAME"));
-			pstmt.setInt(1, Integer.parseInt(userName));
+			pstmt.setString(1, userName);
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()){
-				User res = new User(rs.getString("Name"), rs.getInt("ID"));
-				//res.setGender(rs.getInt("Gender") == 0 ? false :  true);
+				User res = new User(rs.getString("FName"), rs.getString("LName"), rs.getInt("DNI"), rs.getString("email"), 
+						rs.getString("DOB"), rs.getInt("gender") == 0 ? false : true, rs.getString("password"), rs.getString("Address"));
 				return res;
 			}
 		} catch (SQLException e) {
@@ -63,8 +57,8 @@ public class UserDao {
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()){
-				User res = new User(rs.getString("Name"), rs.getInt("ID"));
-				//res.setGender(rs.getInt("Gender") == 0 ? false :  true);
+				User res = new User(rs.getString("FName"), rs.getString("LName"), rs.getInt("DNI"), rs.getString("email"), 
+						rs.getString("DOB"), rs.getInt("gender") == 0 ? false : true, rs.getString("password"), rs.getString("Address"));
 				return res;
 			}
 		} catch (SQLException e) {
@@ -73,4 +67,21 @@ public class UserDao {
 		return null;
 	}
 
+	public static User getUserLog(String userName, String password) {
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(PropReader.get("USER_LOG"));
+			pstmt.setString(1, userName);
+			pstmt.setString(2, password);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs.next()){
+				User res = new User(rs.getString("FName"), rs.getString("LName"), rs.getInt("DNI"), rs.getString("email"), 
+						rs.getString("DOB"), rs.getInt("gender") == 0 ? false : true, rs.getString("password"), rs.getString("Address"));
+				return res;
+			}
+		} catch (SQLException e) {
+			return null;
+		}
+		return null;
+	}
 }
