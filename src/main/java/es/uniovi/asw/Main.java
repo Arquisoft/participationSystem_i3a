@@ -15,6 +15,7 @@ public class Main {
 
 	public static void main (String[] args){
 		logUser();
+		
 		/* Users:
 		 * ID		NAME					EMAIL					  GENDER
 		 * 1		Jorge Tarari		jorge@example.cpm				1

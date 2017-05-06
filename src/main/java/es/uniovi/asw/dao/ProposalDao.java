@@ -116,6 +116,7 @@ public class ProposalDao {
 		try {
 			PreparedStatement stmt = conn.prepareStatement(PropReader.get("PROPOSAL_DELETE"));
 			stmt.setInt(1, proposal.getId());
+			kfp.send("deletedProposal", String.valueOf(proposal.getId()));
 			return stmt.executeUpdate();
 		} catch (SQLException e) {
 			return 0;
@@ -127,7 +128,7 @@ public class ProposalDao {
 		try {
 			if(exists(proposal)) {
 				VoteDao.SaveVotes(proposal);
-				kfp.SendMessage("Proposal", "Vote changed");
+				kfp.send("votedProposal", String.valueOf(proposal.getId()));
 				return 1;
 			}
 			String[] notAllowed = PropReader.get("notAllowedWords").toString().split(",");
@@ -144,7 +145,7 @@ public class ProposalDao {
 			stmt.setString(5, proposal.getCategory());
 			stmt.setString(6, proposal.getDate());
 			VoteDao.SaveVotes(proposal);
-			kfp.SendMessage("Proposal", "New Vote");
+			kfp.send("createdProposal", String.valueOf(proposal.getId()));
 			return stmt.executeUpdate();		
 
 		} catch (SQLException e) {
