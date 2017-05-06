@@ -34,7 +34,7 @@ public class CommentMenu extends AbstractMenu{
 			
 			int comment = Integer.parseInt(console.readLine());
 			
-			Comment comm = (Comment) propos.getComments().get(comment);
+			Comment comm = (Comment) propos.getComments().get(comment-1);
 			
 			System.out.println("Press 1 to vote positive and 2 to vote negative");
 			String choice = console.readLine();

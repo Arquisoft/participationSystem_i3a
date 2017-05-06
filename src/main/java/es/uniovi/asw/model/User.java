@@ -4,7 +4,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + DNI + ", name=" + name + ", email=" + email + ", gender=" + gender + "]";
+		return "User [id=" + DNI + ", name=" + name + ", email=" + email + ", gender=" + (gender ? "Male" : "Female") + "]";
 	}
 
 	private String name;

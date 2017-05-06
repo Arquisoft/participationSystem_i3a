@@ -54,6 +54,23 @@ public class VoteDao {
 		}
 	}
 
+	public static void SetVotes(Comment prop) {
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(PropReader.get("VOTE_COMM"));
+			pstmt.setInt(1, prop.getId());
+			ResultSet rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				if(rs.getInt("Type") == 1) 
+					prop.AddPositive(UserDao.getUserByID(rs.getInt("VotUserID")));
+				else
+					prop.AddNegative(UserDao.getUserByID(rs.getInt("VotUserID")));
+					
+			}
+		} catch (SQLException e) {
+			return;
+		}
+	}
 	public static void SaveVotes(Comment com) {
 		List<User> pos = com.getPositiveVotes();
 		List<User> neg = com.getNegativeVotes();

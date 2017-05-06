@@ -50,7 +50,7 @@ public class CommentDao {
 			stmt.setString(1, comment.getText());
 			stmt.setInt(2, comment.getUser().getId());
 			stmt.setInt(3, comment.getProposal().getId());
-			stmt.setDate(4, comment.getDate());
+			stmt.setString(4, comment.getDate());
 			kfc.SendMessage("Comment", "New Comment");
 			return stmt.executeUpdate();		
 
@@ -69,7 +69,10 @@ public class CommentDao {
 			List<Filtrable> comments = new ArrayList<Filtrable>();
 			while(rs.next()){
 				new UserDao();
-				comments.add(new Comment(UserDao.getUserByID(rs.getInt("UserID")), proposal, rs.getString("Text")));
+				Comment com = new Comment(UserDao.getUserByID(rs.getInt("UserID")), proposal, rs.getString("Text"), rs.getInt("Comment.ID"), rs.getString("Date"));
+				new VoteDao();
+				VoteDao.SetVotes(com);
+				comments.add(com);
 			}
 			
 			return comments;
