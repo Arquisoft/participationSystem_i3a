@@ -132,6 +132,7 @@ public class ProposalDao {
 			stmt.setInt(3, proposal.getUser().getId());
 			stmt.setString(4, proposal.getTitle());
 			stmt.setString(5, proposal.getCategory());
+			stmt.setString(6, proposal.getDate());
 			VoteDao.SaveVotes(proposal);
 			kfp.SendMessage("Proposal", "New Vote");
 			return stmt.executeUpdate();		
@@ -150,7 +151,7 @@ public class ProposalDao {
 
 			while (rs.next()) {
 				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("USERID")), rs.getString("Title"),
-						rs.getString("Category"), rs.getString("Text"));
+						rs.getString("Category"), rs.getString("Text"), rs.getInt("ID"), rs.getString("Date"));
 				VoteDao.SetVotes(prop);
 				prop.setComments(CommentDao.getCommentsOf(prop));
 				ret.add(prop);

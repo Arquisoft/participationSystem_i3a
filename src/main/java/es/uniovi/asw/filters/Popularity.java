@@ -1,7 +1,9 @@
 package es.uniovi.asw.filters;
 
+import java.util.Collections;
 import java.util.List;
 
+import comparator.PopularityComparator;
 import es.uniovi.asw.model.filtrable.Filtrable;
 
 public class Popularity implements Filter{
@@ -9,12 +11,8 @@ public class Popularity implements Filter{
 
 	@Override
 	public List<Filtrable> filter(List<Filtrable> listOfFiltables) {
-		
-		//FALTA ORDENAR
-		//List<Comment> lst = (List<Comment>) listOfFiltables.stream().filter(x -> x instanceof Comment);
-		//List<Filtrable> ret = (List<Filtrable>) lst.stream().map( x -> x.getPositiveVotes());
-		//return ret;
-		return null;
+		Collections.sort(listOfFiltables, new PopularityComparator());
+		return listOfFiltables;
 	}
 
 }

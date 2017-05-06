@@ -9,49 +9,47 @@ import java.util.Map;
 import es.uniovi.asw.PropReader;
 import es.uniovi.asw.dao.ProposalDao;
 import es.uniovi.asw.filters.Filter;
+import es.uniovi.asw.model.filtrable.CFiltrable;
 import es.uniovi.asw.model.filtrable.Filtrable;
 
-public class Proposal implements Filtrable {
+public class Proposal extends CFiltrable {
 
 	private int id;
 	private int minimal;
 	// option 1
 	//private Map<String, List<User>> votes;
 	//option 2
-	private List<User> positiveVotes, negativeVotes;
 	private List<Filtrable> comments;
 	private String category;
-	private String text;
 	private User user;
 	private String title;
-
+	public Proposal(int minimalNumberVotes, User user, String title, String category, String text, String date) {
+		this(minimalNumberVotes, user, title, category, text);
+		this.date = date;
+	}
 	public Proposal(int minimalNumberVotes, User user, String title, String category, String text) {
 		this.id=ProposalDao.getNewIdNumber()+1;
 		this.minimal = minimalNumberVotes;
-		//this.votes = new HashMap<String, List<User>>();
-		//votes.put("Positive", new ArrayList<User>());
-		//votes.put("Negative", new ArrayList<User>());
-		this.positiveVotes = new ArrayList<User>();
-		this.negativeVotes = new ArrayList<User>();
+		positiveVotes = new ArrayList<User>();
+		negativeVotes = new ArrayList<User>();
 		this.comments = new ArrayList<Filtrable>();
 		this.category = category;
 		this.text = text;
 		this.user = user;
 		this.title = title;
+		this.date = getNow();
 	}
-
 
 	public Proposal(User user, String title, String category, String text) {
 		this(Integer.parseInt(PropReader.get("minimumVotesNumber")), user, title, category, text);
 	}
 
-	public void AddPositive(User user) {
-		positiveVotes.add(user);
+	public Proposal(User user, String title, String category, String text, int id, String date) {
+		this(user, title, category, text);
+		this.id = id;
+		this.date = date;
 	}
-
-	public void AddNegative(User user) {
-		negativeVotes.add(user);
-	}
+	
 
 	/**
 	 * returns the list of comments of the proposal. It may be filtered by one
@@ -120,14 +118,6 @@ public class Proposal implements Filtrable {
 		this.comments.add(comment);
 	}
 	
-	public List<User> getPositiveVotes() {
-		return positiveVotes;
-	}
-
-	public List<User> getNegativeVotes() {
-		return negativeVotes;
-	}
-
 
 	public void SetID(int int1) {
 		this.id = int1;
@@ -136,6 +126,9 @@ public class Proposal implements Filtrable {
 
 	public void setComments(List<Filtrable> list) {
 		this.comments = list;
+	}
+	public String getDate() {
+		return date;
 	} 
  
 }
