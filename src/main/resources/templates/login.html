@@ -27,12 +27,10 @@
 <body>
 
 <div class="container">
-    <form th:action="@{/login}" method="post" class="form-signin">
+    <form th:action="@{/showAddProposals}" method="post" class="form-signin">
         <h2 class="form-signin-heading">Introduce your data</h2>
-        <label for="inputEmail" class="sr-only">National Identity Number</label>
-        <input type="text" name="userID" id="inputID" class="form-control" placeholder="National Identity Number" required>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="userPassword" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input type="text" name="uID" th:field="*{uID}" id="uID" class="form-control" placeholder="National Identity Number" required>
+        <input type="password" name="uPASS" th:field="*{uPASS}" id="uPASS" class="form-control" placeholder="Password" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
 

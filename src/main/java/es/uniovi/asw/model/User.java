@@ -4,22 +4,22 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + DNI + ", name=" + name + ", email=" + email + ", gender=" + (gender ? "Male" : "Female") + "]";
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", gender=" + (gender ? "Male" : "Female") + "]";
 	}
 
 	private String name;
 	private String LName;
-	private int DNI;
+	private int id;
 	private String email;
 	private String DOB;
 	private boolean gender;
 	private String password;
 	private String Address;
 	
-	public User(String name, String LName, int DNI, String email, String DOB, boolean gender, String password, String Address) {
+	public User(String name, String LName, int id, String email, String DOB, boolean gender, String password, String Address) {
 		this.name = name;
 		this.LName = LName;
-		this.DNI = DNI;
+		this.id = id;
 		this.email = email;
 		this.DOB = DOB;
 		this.gender = gender;
@@ -28,7 +28,7 @@ public class User {
 	}
 	
 	public int getId() {
-		return DNI;
+		return id;
 	}
 
 	public String getName() {
@@ -58,13 +58,13 @@ public class User {
 		this.gender = gender;
 	}
 
-	public int getDNI() {
-		return DNI;
-	}
-
-	public void setDNI(int dNI) {
-		DNI = dNI;
-	}
+//	public int getDNI() {
+//		return DNI;
+//	}
+//
+//	public void setDNI(int dNI) {
+//		DNI = dNI;
+//	}
 
 	public String getDOB() {
 		return DOB;

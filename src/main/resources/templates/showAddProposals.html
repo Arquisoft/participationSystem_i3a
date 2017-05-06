@@ -28,7 +28,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="p : ${proposals}">
+				<tr th:each="p : ${allProposals}">
 					<td th:text="${p.getTitle()}"></td>
 					<td><a th:href="${'/selectProposal/' + p.getId()}"
 						class="btn btn-info" th:id="${p.getId()}">Comment</a></td>
