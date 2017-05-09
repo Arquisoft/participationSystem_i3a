@@ -19,7 +19,7 @@ public class UserDao {
 			e.printStackTrace();
 		}
 	}
-	private void openConn() throws SQLException {
+	private static void openConn() throws SQLException {
 		try {
 		if(conn == null) {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -62,6 +62,7 @@ public class UserDao {
 				return res;
 			}
 		} catch (SQLException e) {
+
 			return null;
 		}
 		return null;

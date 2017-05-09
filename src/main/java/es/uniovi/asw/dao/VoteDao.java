@@ -24,7 +24,7 @@ public class VoteDao {
 		}
 	}
 
-	private void openConn() throws SQLException {
+	private static void openConn() throws SQLException {
 		try {
 			if (conn == null) {
 				Class.forName("com.mysql.jdbc.Driver");

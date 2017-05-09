@@ -30,7 +30,7 @@ public class MainController {
     public ModelAndView landing(Model model) {
     	//model.addAttribute("message", new Message());
     	ModelAndView model2 = new ModelAndView("login");
-    	model.addAttribute("uID", 0);
+    	model.addAttribute("uID", new Integer(0));
     	model.addAttribute("uPASS", "");
     	model.addAttribute("errorMsg", "");
         return model2;
@@ -43,7 +43,7 @@ public class MainController {
     }
 	
     @RequestMapping("/showAddProposals")
-    public String showAddProposals(@ModelAttribute("uID") int uId, @ModelAttribute("uPASS") String uPass, 
+    public String showAddProposals(@ModelAttribute("uID") Integer uId, @ModelAttribute("uPASS") String uPass, 
     									Model model, HttpServletRequest request,	HttpServletResponse response) {
     	User user = UserDao.getUserLog(uId, uPass);
     	
@@ -58,22 +58,22 @@ public class MainController {
     
     @RequestMapping("/commentProposal/{id}")
     //move to commentProposal.html
-    public String commentProposal(@PathVariable("id") int id){
+    public String commentProposal(@PathVariable("id") Integer id){
     	//TODO
     	return "";
     }
     
     @RequestMapping("/upvoteProposal/{id}")
-    public String upvoteProposal(@PathVariable("id") int id, @ModelAttribute("uID") int uid){
+    public String upvoteProposal(@PathVariable("id") Integer id, @ModelAttribute("uID") Integer uid){
     	new VoteDao();
-    	VoteDao.InsertVotesProp(id, uid, 1);
+    	VoteDao.InsertVotesProp(id, uid, new Integer(1));
     	return "showAddProposals";
     }
     
     @RequestMapping("/downvoteProposal/{id}")
-    public String downvoteProposal(@PathVariable("id") int id, @ModelAttribute("uID") int uid){
+    public String downvoteProposal(@PathVariable("id") Integer id, @ModelAttribute("uID") Integer uid){
     	new VoteDao();
-    	VoteDao.InsertVotesProp(id, uid, 1);
+    	VoteDao.InsertVotesProp(id, uid, new Integer(1));
     	return "showAddProposals";
     }
     
@@ -85,22 +85,22 @@ public class MainController {
     
     @RequestMapping("/createComment/{id}")
     // {id} proposal ID
-    public String createComment(@PathVariable("id") int id){
+    public String createComment(@PathVariable("id") Integer id){
     	//TODO
     	return "";
     }
     
     @RequestMapping("/upvoteComment/{id}")
-    public String upvoteComment(@PathVariable("id") int id, @ModelAttribute("uID") int uid){
+    public String upvoteComment(@PathVariable("id") Integer id, @ModelAttribute("uID") Integer uid){
     	new VoteDao();
-    	VoteDao.InsertVotesCom(id, uid, 1);
+    	VoteDao.InsertVotesCom(id, uid, new Integer(1));
     	return "showAddProposals";
     }
     
     @RequestMapping("/downvoteComment/{id}")
-    public String downvoteComment(@PathVariable("id") int id, @ModelAttribute("uID") int uid){
+    public String downvoteComment(@PathVariable("id") Integer id, @ModelAttribute("uID") Integer uid){
     	new VoteDao();
-    	VoteDao.InsertVotesCom(id, uid, 1);
+    	VoteDao.InsertVotesCom(id, uid, new Integer(1));
     	return "showAddProposals";
     }
     

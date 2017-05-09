@@ -6,7 +6,11 @@ import java.io.InputStreamReader;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import es.uniovi.asw.dao.CategoryDao;
+import es.uniovi.asw.dao.CommentDao;
+import es.uniovi.asw.dao.ProposalDao;
 import es.uniovi.asw.dao.UserDao;
+import es.uniovi.asw.dao.VoteDao;
 import es.uniovi.asw.kafka.KafkaConsumer;
 import es.uniovi.asw.menus.MainMenu;
 import es.uniovi.asw.menus.Menu;
@@ -33,6 +37,11 @@ public class Main {
 		kafka.run();
 		///currentUser = new User("Andrei Manu", 1679344);
 		mainMenu();  */
+		new CategoryDao();
+		new CommentDao();
+		new ProposalDao();
+		new UserDao();
+		new VoteDao();
 	    	SpringApplication.run(Main.class, args);
 	    
 	}
