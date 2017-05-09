@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import es.uniovi.asw.dao.ProposalDao;
@@ -25,13 +26,13 @@ public class MainController {
 
     @Autowired
     private KafkaProducer kafkaProducer;
-    
+   
     @RequestMapping("/")
     public ModelAndView landing(Model model) {
     	//model.addAttribute("message", new Message());
     	ModelAndView model2 = new ModelAndView("login");
-    	model.addAttribute("uID", new Integer(0));
-    	model.addAttribute("uPASS", "");
+    	model.addAttribute("id", "");
+    	model.addAttribute("password", "");
     	model.addAttribute("errorMsg", "");
         return model2;
     }
@@ -43,9 +44,11 @@ public class MainController {
     }
 	
     @RequestMapping("/showAddProposals")
-    public String showAddProposals(@ModelAttribute("uID") Integer uId, @ModelAttribute("uPASS") String uPass, 
+    public String showAddProposals(@RequestParam(value = "id") String uId, @RequestParam(value = "password") String uPass, 
     									Model model, HttpServletRequest request,	HttpServletResponse response) {
-    	User user = UserDao.getUserLog(uId, uPass);
+    	System.out.println(uId + " - " + uPass);
+    	if(uId.isEmpty()) return("login");
+    	User user = UserDao.getUserLog(Integer.parseInt(uId), uPass);
     	
 		if (user == null)
 			return ("login");
@@ -58,22 +61,22 @@ public class MainController {
     
     @RequestMapping("/commentProposal/{id}")
     //move to commentProposal.html
-    public String commentProposal(@PathVariable("id") Integer id){
+    public String commentProposal(@PathVariable("id") String id){
     	//TODO
     	return "";
     }
     
     @RequestMapping("/upvoteProposal/{id}")
-    public String upvoteProposal(@PathVariable("id") Integer id, @ModelAttribute("uID") Integer uid){
+    public String upvoteProposal(@PathVariable("id") String id, @ModelAttribute("id") Integer uid){
     	new VoteDao();
-    	VoteDao.InsertVotesProp(id, uid, new Integer(1));
+    	VoteDao.InsertVotesProp(Integer.parseInt(id), uid, 1);
     	return "showAddProposals";
     }
     
     @RequestMapping("/downvoteProposal/{id}")
-    public String downvoteProposal(@PathVariable("id") Integer id, @ModelAttribute("uID") Integer uid){
+    public String downvoteProposal(@PathVariable("id") String id, @ModelAttribute("id") Integer uid){
     	new VoteDao();
-    	VoteDao.InsertVotesProp(id, uid, new Integer(1));
+    	VoteDao.InsertVotesProp(Integer.parseInt(id), uid, 1);
     	return "showAddProposals";
     }
     
@@ -85,22 +88,22 @@ public class MainController {
     
     @RequestMapping("/createComment/{id}")
     // {id} proposal ID
-    public String createComment(@PathVariable("id") Integer id){
+    public String createComment(@PathVariable("id") String id){
     	//TODO
     	return "";
     }
     
     @RequestMapping("/upvoteComment/{id}")
-    public String upvoteComment(@PathVariable("id") Integer id, @ModelAttribute("uID") Integer uid){
+    public String upvoteComment(@PathVariable("id") String id, @ModelAttribute("id") Integer uid){
     	new VoteDao();
-    	VoteDao.InsertVotesCom(id, uid, new Integer(1));
+    	VoteDao.InsertVotesCom(Integer.parseInt(id), uid, 1);
     	return "showAddProposals";
     }
     
     @RequestMapping("/downvoteComment/{id}")
-    public String downvoteComment(@PathVariable("id") Integer id, @ModelAttribute("uID") Integer uid){
+    public String downvoteComment(@PathVariable("id") String id, @ModelAttribute("id") Integer uid){
     	new VoteDao();
-    	VoteDao.InsertVotesCom(id, uid, new Integer(1));
+    	VoteDao.InsertVotesCom(Integer.parseInt(id), uid, 1);
     	return "showAddProposals";
     }
     

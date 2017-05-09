@@ -6,15 +6,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import es.uniovi.asw.PropReader;
 import es.uniovi.asw.dao.ProposalDao;
 import es.uniovi.asw.filters.Filter;
 import es.uniovi.asw.model.filtrable.CFiltrable;
 import es.uniovi.asw.model.filtrable.Filtrable;
-
 public class Proposal extends CFiltrable {
-
+	@Autowired
 	private int id;
+	@Autowired
 	private int minimal;
 	// option 1
 	//private Map<String, List<User>> votes;
@@ -50,7 +52,6 @@ public class Proposal extends CFiltrable {
 		this.date = date;
 	}
 	
-
 	/**
 	 * returns the list of comments of the proposal. It may be filtered by one
 	 * of the predefined filters
