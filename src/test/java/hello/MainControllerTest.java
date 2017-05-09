@@ -17,12 +17,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.client.RestTemplate;
 
-import es.uniovi.asw.Application;
+import es.uniovi.asw.Main;
 import es.uniovi.asw.UserInfo;
 
 @SuppressWarnings("deprecation")
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)
+@SpringApplicationConfiguration(classes = Main.class)
 @WebAppConfiguration
 @IntegrationTest({"server.port=0"})
 public class MainControllerTest {

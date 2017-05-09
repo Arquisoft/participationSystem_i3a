@@ -50,6 +50,8 @@ public class VoteDao {
 					prop.AddNegative(UserDao.getUserByID(rs.getInt("VotUserID")));
 					
 			}
+			KafkaProducer kfc = new KafkaProducer();
+			kfc.send("votedProposal", String.valueOf(prop.getId()));
 		} catch (SQLException e) {
 			return;
 		}
@@ -69,7 +71,7 @@ public class VoteDao {
 					
 			}
 			KafkaProducer kfc = new KafkaProducer();
-			kfc.send("votedComment", String.valueOf(prop.getId()));
+			kfc.send("votedComment", String.valueOf(prop.getProposal().getId()));
 		} catch (SQLException e) {
 			return;
 		}

@@ -17,10 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 import es.uniovi.asw.dao.ProposalDao;
 import es.uniovi.asw.dao.UserDao;
 import es.uniovi.asw.dao.VoteDao;
+import es.uniovi.asw.kafka.KafkaProducer;
 import es.uniovi.asw.model.Proposal;
 import es.uniovi.asw.model.User;
-import es.uniovi.asw.producers.KafkaProducer;
-
 @Controller
 public class MainController {
 
@@ -28,12 +27,13 @@ public class MainController {
     private KafkaProducer kafkaProducer;
     
     @RequestMapping("/")
-    public String landing(Model model) {
+    public ModelAndView landing(Model model) {
     	//model.addAttribute("message", new Message());
+    	ModelAndView model2 = new ModelAndView("login");
     	model.addAttribute("uID", 0);
     	model.addAttribute("uPASS", "");
     	model.addAttribute("errorMsg", "");
-        return "login";
+        return model2;
     }
     
     @RequestMapping("/send")

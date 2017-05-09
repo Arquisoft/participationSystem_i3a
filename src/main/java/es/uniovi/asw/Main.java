@@ -3,22 +3,22 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import es.uniovi.asw.dao.UserDao;
 import es.uniovi.asw.kafka.KafkaConsumer;
 import es.uniovi.asw.menus.MainMenu;
 import es.uniovi.asw.menus.Menu;
 import es.uniovi.asw.model.User;
-
+@SpringBootApplication
 public class Main {
 
 	private static BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 	private static User currentUser = null;
 
 	public static void main (String[] args){
-		logUser();
+		/*logUser();
 		Thread kafka = new Thread() {
 		    public void run() {
 		        KafkaConsumer kfc = new KafkaConsumer();
@@ -30,27 +30,18 @@ public class Main {
 		        kfc.Read();
 		    }  
 		};
-		 Logger.getLogger("org").setLevel(Level.WARN);
-	      Logger.getLogger("akka").setLevel(Level.WARN);      
-	      Logger.getLogger("kafka").setLevel(Level.WARN);
 		kafka.run();
-		/* Users:
-		 * ID		NAME					EMAIL					  GENDER
-		 * 1		Jorge Tarari		jorge@example.cpm				1
-		 *1679344	Andrei Manu			uo240704@uniovi.es				1
-		 *9940449	Ana Torres Pardo	ana@example.com					0
-		 *19160962	Luis Lopez Fernando	luis@example.com				1
-		 *90500084	Juan Torres Pardo	juan@example.com				1
-		 */
 		///currentUser = new User("Andrei Manu", 1679344);
-		mainMenu();  
+		mainMenu();  */
+	    	SpringApplication.run(Main.class, args);
+	    
 	}
 	
 	private static User logUser(){
 		new UserDao();
 		try {
 			while (currentUser == null) {
-				System.out.println("Log with a valid user (National ID)");
+				System.out.println("Log with a valid user (National ID w/ no letters)");
 				currentUser = UserDao.getUserByID(Integer.parseInt(console.readLine()));
 			}
 		} catch (IOException e) {
