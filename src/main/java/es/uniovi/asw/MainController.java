@@ -23,10 +23,14 @@ import es.uniovi.asw.model.Proposal;
 import es.uniovi.asw.model.User;
 @Controller
 public class MainController {
-
+	private User loggedUser;
     @Autowired
     private KafkaProducer kafkaProducer;
    
+    @ModelAttribute("Proposal")
+    public Proposal getProposal() {
+    	return new Proposal();
+    }
     @RequestMapping("/")
     public ModelAndView landing(Model model) {
     	//model.addAttribute("message", new Message());
@@ -55,6 +59,7 @@ public class MainController {
 		else {
 			// see getAllProposals(). We get the proposals from html.
 			//((ModelAndView) model).addObject("proposals", getAllProposals());
+			loggedUser = user;
 			return "showAddProposals";
 		}
     }
@@ -81,9 +86,11 @@ public class MainController {
     }
     
     @RequestMapping("/createProposal")
-    public String createProposal(){
-    	//TODO
-    	return "";
+    public String createProposal(@ModelAttribute("Proposal") Proposal proposal, @RequestParam(value="title") String title, @RequestParam(value="text") String text, @RequestParam(value="category") String category, Model model){
+    	new ProposalDao();
+    	Proposal prp = new Proposal(loggedUser, title, category, text);
+    	ProposalDao.save(prp);
+    	return "showAddProposals";
     }
     
     @RequestMapping("/createComment/{id}")

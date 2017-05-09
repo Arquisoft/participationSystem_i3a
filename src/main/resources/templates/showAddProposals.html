@@ -43,7 +43,7 @@
 	<div>
 		<h2 align="center">Add a new proposal</h2>
 		<form role="form" th:action="@{/createProposal}"
-			th:object="${createProposal}" method="POST">
+			th:object="${Proposal}" method="POST">
 			<div >
 				<label for="title">Title: </label> <input type="text" id="title"
 					th:field="*{title}" class="form-control" />
@@ -51,7 +51,7 @@
 			<div>
 				<label for="description">Content: </label>
 				<textarea class="form-control" rows="5" id="contentInput"
-					th:field="*{content}"></textarea>
+					th:field="*{text}"></textarea>
 			</div>
 			<div>
 				<label for="category">Category: </label>

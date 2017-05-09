@@ -52,6 +52,9 @@ public class Proposal extends CFiltrable {
 		this.date = date;
 	}
 	
+	public Proposal() {
+		// TODO Auto-generated constructor stub
+	}
 	/**
 	 * returns the list of comments of the proposal. It may be filtered by one
 	 * of the predefined filters
