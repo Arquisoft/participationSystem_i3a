@@ -1,11 +1,19 @@
 package hello;
 
+import static org.junit.Assert.*;
+
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import es.uniovi.asw.model.*;
-import es.uniovi.asw.dao.*;
+
+import es.uniovi.asw.dao.CommentDao;
+import es.uniovi.asw.dao.ProposalDao;
+import es.uniovi.asw.dao.UserDao;
+import es.uniovi.asw.dao.VoteDao;
+import es.uniovi.asw.model.Comment;
+import es.uniovi.asw.model.Proposal;
+import es.uniovi.asw.model.User;
 public class TestPls {
 	private static User currUser;
 	@Before
@@ -37,12 +45,17 @@ public class TestPls {
 		int count2 = ProposalDao.GetProposalByUser(currUser.getId()).size();
 		assert(count1 < count2);
 	}
+
+	Proposal proposal = new Proposal(currUser, "Testing", "TestCategory", "TestText");
 	
 	@Test
 	public void TestComment() {
+		Comment comment = new Comment(currUser, proposal, "newComment");
+		CommentDao.save(comment);
 		
+		assertTrue(comment.toString().contains("newComment"));
 	}
-
+	
 	@Test
 	public void TestPositiveVote() {
 		List<Proposal> props = ProposalDao.GetProposalByUser(currUser.getId());
