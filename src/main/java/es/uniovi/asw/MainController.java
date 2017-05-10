@@ -69,13 +69,13 @@ public class MainController {
     
     @RequestMapping("/commentProposal/{id}")
     //move to commentProposal.html
-    public String commentProposal(@PathVariable("id") String id, Model model){
+    public ModelAndView commentProposal(@PathVariable("id") String id, Model model){
     	new ProposalDao();
     	Proposal p = ProposalDao.GetProposalByID(Integer.parseInt(id));
     	ModelAndView mav = new ModelAndView("commentProposal");
     	model.addAttribute("p", p);
     	mav.addObject("p", p);
-    	return "commentProposal";
+    	return mav;
     }
     
     @RequestMapping("/upvoteProposal/{id}")
