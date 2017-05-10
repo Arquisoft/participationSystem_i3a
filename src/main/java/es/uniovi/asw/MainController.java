@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import es.uniovi.asw.dao.CommentDao;
 import es.uniovi.asw.dao.ProposalDao;
 import es.uniovi.asw.dao.UserDao;
 import es.uniovi.asw.dao.VoteDao;
@@ -24,6 +26,7 @@ import es.uniovi.asw.model.User;
 @Controller
 public class MainController {
 	private User loggedUser;
+	private Proposal p;
     @Autowired
     private KafkaProducer kafkaProducer;
    
@@ -66,31 +69,42 @@ public class MainController {
     
     @RequestMapping("/commentProposal/{id}")
     //move to commentProposal.html
-    public String commentProposal(@PathVariable("id") String id){
-    	//TODO
-    	return "";
+    public String commentProposal(@PathVariable("id") String id, Model model){
+    	new ProposalDao();
+    	Proposal p = ProposalDao.GetProposalByID(Integer.parseInt(id));
+    	ModelAndView mav = new ModelAndView("commentProposal");
+    	model.addAttribute("p", p);
+    	mav.addObject("p", p);
+    	return "commentProposal";
     }
     
     @RequestMapping("/upvoteProposal/{id}")
-    public String upvoteProposal(@PathVariable("id") String id, @ModelAttribute("id") Integer uid){
+    public String upvoteProposal(@PathVariable("id") String id, @ModelAttribute("id") Integer uid, RedirectAttributes request){
     	new VoteDao();
-    	VoteDao.InsertVotesProp(Integer.parseInt(id), uid, 1);
-    	return "showAddProposals";
+    	VoteDao.InsertVotesProp(Integer.parseInt(id), loggedUser.getId(), 1);
+    	request.addAttribute("id", loggedUser.getId());
+    	request.addAttribute("password", loggedUser.getPassword());
+    	return "redirect:showAddProposals";
     }
     
     @RequestMapping("/downvoteProposal/{id}")
-    public String downvoteProposal(@PathVariable("id") String id, @ModelAttribute("id") Integer uid){
+    public String downvoteProposal(@PathVariable("id") String id, @ModelAttribute("id") Integer uid, RedirectAttributes request){
     	new VoteDao();
-    	VoteDao.InsertVotesProp(Integer.parseInt(id), uid, 1);
-    	return "showAddProposals";
+    	VoteDao.InsertVotesProp(Integer.parseInt(id),  loggedUser.getId(), 0);
+    	request.addAttribute("id", loggedUser.getId());
+    	request.addAttribute("password", loggedUser.getPassword());
+    	return "redirect:showAddProposals";
     }
     
     @RequestMapping("/createProposal")
-    public String createProposal(@ModelAttribute("Proposal") Proposal proposal, @RequestParam(value="title") String title, @RequestParam(value="text") String text, @RequestParam(value="category") String category, Model model){
+    public String createProposal(@ModelAttribute("Proposal") Proposal proposal, @RequestParam(value="title") String title, @RequestParam(value="text") String text,
+    							@RequestParam(value="category") String category, Model model, RedirectAttributes request){
     	new ProposalDao();
     	Proposal prp = new Proposal(loggedUser, title, category, text);
     	ProposalDao.save(prp);
-    	return "showAddProposals";
+    	request.addAttribute("id", loggedUser.getId());
+    	request.addAttribute("password", loggedUser.getPassword());
+    	return "redirect:showAddProposals";
     }
     
     @RequestMapping("/createComment/{id}")
@@ -101,16 +115,20 @@ public class MainController {
     }
     
     @RequestMapping("/upvoteComment/{id}")
-    public String upvoteComment(@PathVariable("id") String id, @ModelAttribute("id") Integer uid){
+    public String upvoteComment(@PathVariable("id") String id, @ModelAttribute("id") Integer uid, RedirectAttributes request){
     	new VoteDao();
-    	VoteDao.InsertVotesCom(Integer.parseInt(id), uid, 1);
+    	VoteDao.InsertVotesCom(Integer.parseInt(id),  loggedUser.getId(), 1);
+    	request.addAttribute("id", loggedUser.getId());
+    	request.addAttribute("password", loggedUser.getPassword());
     	return "showAddProposals";
     }
     
     @RequestMapping("/downvoteComment/{id}")
-    public String downvoteComment(@PathVariable("id") String id, @ModelAttribute("id") Integer uid){
+    public String downvoteComment(@PathVariable("id") String id, @ModelAttribute("id") Integer uid, RedirectAttributes request){
     	new VoteDao();
-    	VoteDao.InsertVotesCom(Integer.parseInt(id), uid, 1);
+    	VoteDao.InsertVotesCom(Integer.parseInt(id),  loggedUser.getId(), 0);
+    	request.addAttribute("id", loggedUser.getId());
+    	request.addAttribute("password", loggedUser.getPassword());
     	return "showAddProposals";
     }
     

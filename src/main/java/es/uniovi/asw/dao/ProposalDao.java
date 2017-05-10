@@ -75,7 +75,23 @@ public class ProposalDao {
 		}
 		return ret;
 	}
-	
+	public static Proposal GetProposalByID(int UserID) {
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(PropReader.get("PROPOSAL_BY_ID"));
+			pstmt.setInt(1, UserID);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("UserID")), rs.getString("Title"),
+						rs.getString("Category"), rs.getString("Text"), rs.getInt("ID"), rs.getString("Date"));
+				VoteDao.SetVotes(prop);
+				prop.setComments(CommentDao.getCommentsOf(prop));
+				return prop;
+			} 
+		} catch (SQLException e) {
+			return null;
+		}
+		return null;
+	}
 	public static List<Proposal> getAllProposals() {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(PropReader.get("PROPOSAL_ALL"));
