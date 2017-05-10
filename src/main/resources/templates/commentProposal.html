@@ -23,7 +23,7 @@
 				<div>
 					<div>
 						<h2>Content:</h2>
-						<h3 th:text="${p.getContent()}"></h3>
+						<h3 th:text="${p.getText()}"></h3>
 					</div>
 				</div>
 				<div>
@@ -38,12 +38,15 @@
 												<span class="text-muted" th:text="${c.getUser().getName()}"></span>
 											</div>
 											<div class="panel-body">
-												<p th:text="${c.getContent()}"></p>
+												<p th:text="${c.getText()}"></p>
 											</div>
 										</div>
 									</div></td>
 									<td><a th:href="${'/upvoteComment/' + p.getId()}"
 										class="btn btn-info" th:proID="${p.getId()}">Me Likey</a></td>
+										<td th:text="${p.getPositiveVotes().size()}"></td>
+										<td>-</td>
+										<td th:text="${p.getNegativeVotes().size()}"></td>
 									<td><a th:href="${'/downvoteComment/' + p.getId()}"
 										class="btn btn-info" th:proID="${p.getId()}">Nu-uh</a></td>
 								</tr>
@@ -53,9 +56,9 @@
 					<div th:with="idProposal=${p.getId()}">
 						<h3>Add comment</h3>
 						<form role="form" th:action="@{/createComment/} + ${idProposal}"
-							th:object="${createComment}" method="POST">
-							<textarea class="form-control" rows="3" id="contentInput"
-								th:field="*{content}" placeholder="Comment"></textarea>
+							th:object="${Comment}" method="POST">
+							<textarea class="form-control" rows="5" id="contentInput"
+							th:field="*{text}"></textarea>
 							<button value="Comment" type="submit" class="btn btn-info"
 								id="SubmitComment">Submit</button>
 						</form>

@@ -10,6 +10,9 @@ public class Comment extends CFiltrable implements Removable{
 	
 	private Proposal proposal;
 	
+	public Comment() {
+		
+	}
 	
 	public Comment(User user, Proposal proposal, String text){
 		super();

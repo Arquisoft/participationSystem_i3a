@@ -90,6 +90,7 @@ public class ProposalDao {
 				return prop;
 			} 
 		} catch (SQLException e) {
+			e.printStackTrace();
 			return null;
 		}
 		return null;
@@ -106,6 +107,7 @@ public class ProposalDao {
 				Proposal prop = new Proposal(UserDao.getUserByID(rs.getInt("UserID")), rs.getString("Title"),
 						rs.getString("Category"), rs.getString("Text"), rs.getInt("ID"), rs.getString("Date"));
 				VoteDao.SetVotes(prop);
+				System.out.println(prop);
 				prop.setComments(CommentDao.getCommentsOf(prop));
 				propos.add(prop);
 			} 

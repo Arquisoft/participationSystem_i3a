@@ -34,6 +34,9 @@
 						class="btn btn-info" th:id="${p.getId()}">Comment</a></td>
 					<td><a th:href="${'/upvoteProposal/' + p.getId()}"
 						class="btn btn-info" th:id="${p.getId()}">Me Likey</a></td>
+										<td th:text="${p.getPositiveVotes().size()}"></td>
+										<td>-</td>
+										<td th:text="${p.getNegativeVotes().size()}"></td>
 					<td><a th:href="${'/downvoteProposal/' + p.getId()}"
 						class="btn btn-info" th:id="${p.getId()}">Nu-uh</a></td>
 				</tr>
@@ -57,6 +60,7 @@
 				<label for="category">Category: </label>
 				<textarea class="form-control" rows="2" id="contentInput"
 					th:field="*{category}"></textarea>
+				
 			</div>
 			<button type="submit" class="btn btn-info" id="submit">Submit proposal</button>
 		</form>

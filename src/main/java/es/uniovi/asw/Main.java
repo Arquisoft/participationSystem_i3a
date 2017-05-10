@@ -41,7 +41,7 @@ public class Main {
 		new ProposalDao();
 		new UserDao();
 		new VoteDao();
-	    	SpringApplication.run(Main.class, args);
+	    SpringApplication.run(Main.class, args);
 	    
 	}
 	

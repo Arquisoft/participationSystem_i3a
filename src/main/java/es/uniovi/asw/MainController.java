@@ -19,10 +19,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.common.collect.Lists;
 
+import es.uniovi.asw.dao.CommentDao;
 import es.uniovi.asw.dao.ProposalDao;
 import es.uniovi.asw.dao.UserDao;
 import es.uniovi.asw.dao.VoteDao;
 import es.uniovi.asw.kafka.KafkaProducer;
+import es.uniovi.asw.model.Comment;
 import es.uniovi.asw.model.Proposal;
 import es.uniovi.asw.model.User;
 @Controller
@@ -31,6 +33,12 @@ public class MainController {
     @Autowired
     private KafkaProducer kafkaProducer;
     private List<Proposal> proposals;
+    
+    @ModelAttribute("Comment")
+    public Comment getComment() {
+    	return new Comment();
+    }
+    
     @ModelAttribute("Proposal")
     public Proposal getProposal() {
     	return new Proposal();
@@ -72,8 +80,10 @@ public class MainController {
     //move to commentProposal.html
     public ModelAndView commentProposal(@PathVariable("id") String id, Model model){
     	new ProposalDao();
+    	System.out.println(id);
     	Proposal p = ProposalDao.GetProposalByID(Integer.parseInt(id));
     	ModelAndView mav = new ModelAndView("commentProposal");
+    	System.out.println(p);
     	model.addAttribute("p", p);
     	mav.addObject("p", p);
     	return mav;
@@ -110,9 +120,12 @@ public class MainController {
     
     @RequestMapping("/createComment/{id}")
     // {id} proposal ID
-    public String createComment(@PathVariable("id") String id){
-    	//TODO
-    	return "";
+    public String createComment(@ModelAttribute("Comment") Comment comment, @PathVariable("id") String proposalID, @RequestParam(value="text") String text){
+    	new CommentDao();
+    	new ProposalDao();
+    	Comment com = new Comment(loggedUser,ProposalDao.GetProposalByID(Integer.parseInt(proposalID)), text);
+    	CommentDao.save(com);
+    	return "redirect:/commentProposal/" + proposalID;
     }
     
     @RequestMapping("/upvoteComment/{id}")
@@ -141,17 +154,7 @@ public class MainController {
     @ModelAttribute("allProposals")
     public List<Proposal> getAllProposals(){
     	new ProposalDao();
-    	if(proposals == null || proposals.size() == 0)
-    		proposals = ProposalDao.getAllProposals();
-    	if(ProposalDao.Refresh) {
-    		Proposal prop = ProposalDao.GetProposalByID(ProposalDao.NewID);
-    		if(!proposals.contains(prop))
-    			proposals.add(prop);
-    		else
-    			proposals = ProposalDao.getAllProposals();
-    		ProposalDao.Refresh = false;
-    		ProposalDao.NewID = 0;
-    	}
+   		proposals = ProposalDao.getAllProposals();
     	return proposals;
     }
     
