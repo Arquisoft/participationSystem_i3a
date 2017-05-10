@@ -15,6 +15,8 @@ import es.uniovi.asw.model.Proposal;
 public class ProposalDao {
 	private static Connection conn;
 	private static KafkaProducer kfp;
+	public static boolean Refresh;
+	public static int NewID;
 	public ProposalDao() { 
 		try {
 			kfp = new KafkaProducer();

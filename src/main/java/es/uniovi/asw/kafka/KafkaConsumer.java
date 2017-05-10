@@ -6,6 +6,8 @@ import java.util.Properties;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 
+import es.uniovi.asw.dao.ProposalDao;
+
 public class KafkaConsumer {
 	private static org.apache.kafka.clients.consumer.KafkaConsumer<String, String> kfc;
 
@@ -31,8 +33,12 @@ public class KafkaConsumer {
 		while (true) {
 			try{
 				ConsumerRecords<String, String> cr = kfc.poll(Long.MAX_VALUE);
-				for (ConsumerRecord<String, String> record : cr)
+				for (ConsumerRecord<String, String> record : cr) {
 					System.out.println(record.key() + " : " + record.value());
+					new ProposalDao();
+					ProposalDao.NewID = Integer.parseInt(record.value());
+					ProposalDao.Refresh = true;
+				}
 			}
 			catch(Exception e) { }
 		}

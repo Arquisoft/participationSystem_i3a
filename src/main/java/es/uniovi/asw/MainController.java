@@ -1,6 +1,7 @@
 package es.uniovi.asw;
 
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import es.uniovi.asw.dao.CommentDao;
+import com.google.common.collect.Lists;
+
 import es.uniovi.asw.dao.ProposalDao;
 import es.uniovi.asw.dao.UserDao;
 import es.uniovi.asw.dao.VoteDao;
@@ -26,10 +28,9 @@ import es.uniovi.asw.model.User;
 @Controller
 public class MainController {
 	private User loggedUser;
-	private Proposal p;
     @Autowired
     private KafkaProducer kafkaProducer;
-   
+    private List<Proposal> proposals;
     @ModelAttribute("Proposal")
     public Proposal getProposal() {
     	return new Proposal();
@@ -84,7 +85,7 @@ public class MainController {
     	VoteDao.InsertVotesProp(Integer.parseInt(id), loggedUser.getId(), 1);
     	request.addAttribute("id", loggedUser.getId());
     	request.addAttribute("password", loggedUser.getPassword());
-    	return "redirect:showAddProposals";
+    	return "redirect:../showAddProposals";
     }
     
     @RequestMapping("/downvoteProposal/{id}")
@@ -93,7 +94,7 @@ public class MainController {
     	VoteDao.InsertVotesProp(Integer.parseInt(id),  loggedUser.getId(), 0);
     	request.addAttribute("id", loggedUser.getId());
     	request.addAttribute("password", loggedUser.getPassword());
-    	return "redirect:showAddProposals";
+    	return "redirect:../showAddProposals";
     }
     
     @RequestMapping("/createProposal")
@@ -140,7 +141,18 @@ public class MainController {
     @ModelAttribute("allProposals")
     public List<Proposal> getAllProposals(){
     	new ProposalDao();
-    	return ProposalDao.getAllProposals();
+    	if(proposals == null || proposals.size() == 0)
+    		proposals = ProposalDao.getAllProposals();
+    	if(ProposalDao.Refresh) {
+    		Proposal prop = ProposalDao.GetProposalByID(ProposalDao.NewID);
+    		if(!proposals.contains(prop))
+    			proposals.add(prop);
+    		else
+    			proposals = ProposalDao.getAllProposals();
+    		ProposalDao.Refresh = false;
+    		ProposalDao.NewID = 0;
+    	}
+    	return proposals;
     }
     
 }
